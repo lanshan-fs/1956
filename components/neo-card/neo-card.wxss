@@ -1,0 +1,94 @@
+/* Neobrutalism Card Style */
+.neo-card {
+  width: 100%;
+  background: #ffffff;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--neo-shadow);
+  overflow: hidden;
+  margin-bottom: 24rpx;
+  transition: all 0.1s ease;
+  position: relative;
+}
+
+/* 点击时的反馈效果 */
+.neo-card:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: var(--neo-shadow-active);
+}
+
+.card-image {
+  width: 100%;
+  border-bottom: var(--border-width) solid var(--border-color);
+  display: block; /* 消除图片底部空隙 */
+  background-color: #f0f0f0; /* 加载前的占位色 */
+}
+
+.card-content {
+  padding: 16rpx;
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 16rpx;
+  color: var(--text-main);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.avatar {
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid var(--border-color);
+  border-radius: 50%;
+  margin-right: 8rpx;
+  background-color: var(--accent); /* 默认头像底色 */
+}
+
+.username {
+  color: #666;
+  max-width: 120rpx;
+}
+
+.like-info {
+  display: flex;
+  align-items: center;
+}
+
+.heart-icon {
+  margin-right: 4rpx;
+  color: #ccc;
+  font-size: 24rpx;
+}
+
+.heart-icon.liked {
+  color: var(--primary);
+}
+
+/* 文本截断工具类 */
+.text-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.text-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}

@@ -1,7 +1,48 @@
-<!--index.wxml-->
-<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    Weixin
+<view class="container page-home">
+  <view class="header-section">
+    <view class="search-icon-wrapper" bindtap="onSearch">
+      <icon type="search" size="22" color="#1A1A1A"/>
+    </view>
+    
+    <scroll-view scroll-x class="tabs-scroll" enable-flex show-scrollbar="{{false}}">
+      <view class="tabs-container">
+        <view 
+          wx:for="{{tabs}}" 
+          wx:key="id" 
+          class="tab-item {{currentTab === index ? 'active' : ''}}"
+          bindtap="switchTab"
+          data-index="{{index}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </scroll-view>
   </view>
-</scroll-view>
+
+  <view class="waterfall-container">
+    <view class="column">
+      <block wx:for="{{leftList}}" wx:key="id">
+        <neo-card 
+          title="{{item.title}}" 
+          cover="{{item.cover}}" 
+          avatar="{{item.avatar}}"
+          nickname="{{item.nickname}}"
+          likes="{{item.likes}}"
+          isLiked="{{item.isLiked}}"
+        />
+      </block>
+    </view>
+    <view class="column">
+      <block wx:for="{{rightList}}" wx:key="id">
+        <neo-card 
+          title="{{item.title}}" 
+          cover="{{item.cover}}" 
+          avatar="{{item.avatar}}"
+          nickname="{{item.nickname}}"
+          likes="{{item.likes}}"
+          isLiked="{{item.isLiked}}"
+        />
+      </block>
+    </view>
+  </view>
+</view>

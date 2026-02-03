@@ -1,10 +1,49 @@
-/**app.wxss**/
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+/** app.wxss **/
+
+/* 1956 核心设计系统变量 */
+page {
+  /* --- 色板：中医药 x 孟菲斯 --- */
+  /* 主色：朱砂红 (Cinnabar) - 活力、官方感 */
+  --primary: #FF4D4D; 
+  /* 辅色：艾草绿 (Mugwort) - 治愈、生活 */
+  --secondary: #2ECC71; 
+  /* 强调：连翘黄 (Forsythia) - 醒目、警告 */
+  --accent: #FFD93D;
+  /* 背景：宣纸白 (Rice Paper) - 稍微带点暖色，不刺眼 */
+  --background: #FFFDF5;
+  /* 文字与边框：墨黑 (Ink) - 新粗野主义的灵魂 */
+  --text-main: #1A1A1A;
+  --border-color: #000000;
+
+  /* --- 新粗野主义 (Neobrutalism) 特征 --- */
+  --border-width: 4rpx;
+  --shadow-offset: 6rpx;
+  --radius-md: 16rpx;
+  --radius-sm: 8rpx;
+  
+  /* 统一阴影样式：硬边框、不模糊 */
+  --neo-shadow: 6rpx 6rpx 0px 0px var(--border-color);
+  --neo-shadow-active: 2rpx 2rpx 0px 0px var(--border-color); /* 点击时的按压效果 */
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+    
+  background-color: var(--background);
+  color: var(--text-main);
   box-sizing: border-box;
-} 
+}
+
+/* 通用容器 */
+.container {
+  min-height: 100vh;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

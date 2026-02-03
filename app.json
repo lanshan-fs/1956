@@ -1,24 +1,55 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/market/market",
+    "pages/post/post",
+    "pages/notice/notice",
+    "pages/profile/profile"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFDF5",
+    "navigationBarTitleText": "1956",
+    "navigationBarTextStyle": "black"
   },
-  "style": "v2",
-  "renderer": "skyline",
-  "rendererOptions": {
-    "skyline": {
-      "defaultDisplayBlock": true,
-      "defaultContentBox": true,
-      "tagNameStyleIsolation": "legacy",
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255"
-    }
+  "tabBar": {
+    "color": "#1A1A1A",
+    "selectedColor": "#FF4D4D",
+    "backgroundColor": "#FFFDF5",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab_home.png",
+        "selectedIconPath": "images/tab_home_active.png"
+      },
+      {
+        "pagePath": "pages/market/market",
+        "text": "集市",
+        "iconPath": "images/tab_market.png",
+        "selectedIconPath": "images/tab_market_active.png"
+      },
+      {
+        "pagePath": "pages/post/post",
+        "text": "发布",
+        "iconPath": "images/tab_add.png",
+        "selectedIconPath": "images/tab_add.png"
+      },
+      {
+        "pagePath": "pages/notice/notice",
+        "text": "公告",
+        "iconPath": "images/tab_notice.png",
+        "selectedIconPath": "images/tab_notice_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人",
+        "iconPath": "images/tab_profile.png",
+        "selectedIconPath": "images/tab_profile_active.png"
+      }
+    ]
   },
-  "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
 }

@@ -1,10 +1,96 @@
-/**index.wxss**/
-page {
-  height: 100vh;
+/* 页面容器 */
+.page-home {
+  /* 加上底部 padding，防止内容被 TabBar 遮挡 */
+  padding-bottom: 120rpx; 
+  background-color: var(--background);
+}
+
+/* 顶部区域：固定定位 */
+.header-section {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--background);
+  /* 增加一点底部边框或阴影增加层次感 (可选) */
+  border-bottom: var(--border-width) solid transparent; 
+  padding: 12rpx 0 24rpx 0;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 左侧搜索图标区域 */
+.search-icon-wrapper {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12rpx;
+  background-color: #fff;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 50%; /* 圆形按钮风格 */
+  box-shadow: 4rpx 4rpx 0 0 var(--border-color);
+  flex-shrink: 0; /* 防止被挤压 */
+}
+
+.search-icon-wrapper:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 2rpx 2rpx 0 0 var(--border-color);
+}
+
+/* 右侧 Tabs 滚动区域 */
+.tabs-scroll {
+  flex: 1;
+  height: 80rpx;
+  overflow: hidden; /* 隐藏滚动条 */
+}
+
+.tabs-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-right: 24rpx;
+}
+
+.tab-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 64rpx;
+  padding: 0 32rpx;
+  margin-right: 16rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #666;
+  border: var(--border-width) solid transparent;
+  border-radius: 999rpx; /* 胶囊圆角 */
+  transition: all 0.2s;
+  white-space: nowrap;
+  background-color: transparent;
+}
+
+/* 选中状态：孟菲斯风格高亮 */
+.tab-item.active {
+  color: var(--text-main);
+  background-color: var(--accent); /* 连翘黄 */
+  border-color: var(--border-color);
+  box-shadow: 4rpx 4rpx 0 0 var(--border-color);
+  transform: translate(-2rpx, -2rpx);
+}
+
+/* 瀑布流容器 */
+.waterfall-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 24rpx;
+  padding: 0 12rpx; /* 微调左右间距 */
+}
+
+.column {
+  width: 48%;
   display: flex;
   flex-direction: column;
-}
-.scrollarea {
-  flex: 1;
-  overflow-y: hidden;
 }
