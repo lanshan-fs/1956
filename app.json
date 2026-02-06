@@ -13,6 +13,7 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "custom": true,
     "color": "#1A1A1A",
     "selectedColor": "#FF4D4D",
     "backgroundColor": "#FFFDF5",
@@ -32,7 +33,7 @@
       },
       {
         "pagePath": "pages/post/post",
-        "text": "发布",
+        "text": "",  
         "iconPath": "images/tab_add.png",
         "selectedIconPath": "images/tab_add.png"
       },

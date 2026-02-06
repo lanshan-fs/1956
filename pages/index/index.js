@@ -2,11 +2,14 @@ const app = getApp()
 
 Page({
   data: {
+    statusBarHeight: 20, // 默认值
+    navBarHeight: 44,    // 胶囊按钮高度通常是44px
     currentTab: 0,
+    // showChannelModal: false, // 控制下拉窗
     tabs: [
-      { id: 0, name: '推荐' },
-      { id: 1, name: '集市' },
-      { id: 2, name: '针灸推拿' },
+      { id: 0, name: '良乡' },
+      { id: 1, name: '和平街' },
+      { id: 2, name: '望京' },
       { id: 3, name: '中药园' },
       { id: 4, name: '考研' }
     ],
@@ -23,17 +26,38 @@ Page({
   },
 
   onLoad() {
+    // 1. 获取系统信息，计算顶部高度
+    const systemInfo = wx.getSystemInfoSync();
+    this.setData({
+      statusBarHeight: systemInfo.statusBarHeight
+    });
+
+    // 2. 初始化瀑布流
     this.initWaterfall();
+  },
+
+  onShow() {
+    // 激活自定义底部导航栏的“首页”状态
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 0 })
+    }
   },
 
   switchTab(e) {
     const index = e.currentTarget.dataset.index;
-    this.setData({ currentTab: index });
-    // TODO: 切换 Tab 时重新请求数据
-    wx.showToast({
-      title: `切换到 ${this.data.tabs[index].name}`,
-      icon: 'none'
+    if (this.data.currentTab === index) {
+      // 如果是在下拉窗里点击了当前 Tab，也关闭窗口
+      this.setData({ showChannelModal: false });
+      return;
+    }
+    
+    this.setData({ 
+      currentTab: index,
+      showChannelModal: false // 切换后自动关闭下拉窗
     });
+    
+    wx.vibrateShort();
+    // TODO: 重新请求数据
   },
 
   onPost() {
@@ -44,6 +68,16 @@ Page({
       }
     })
   },
+
+// 打开/关闭下拉窗
+  toggleChannelModal() {
+    this.setData({
+      showChannelModal: !this.data.showChannelModal
+    });
+  },
+
+  // 防止点击弹窗内部时关闭弹窗
+  stopProp() {},
 
   // 简单的左右分栏逻辑，模拟瀑布流
   initWaterfall() {

@@ -1,96 +1,93 @@
-/* 页面容器 */
-.page-home {
-  /* 加上底部 padding，防止内容被 TabBar 遮挡 */
-  padding-bottom: 120rpx; 
+/* 页面背景 */
+page {
   background-color: var(--background);
 }
 
-/* 顶部区域：固定定位 */
-.header-section {
-  position: sticky;
+.page-home {
+  padding-bottom: 150rpx; /* 留出底部 TabBar 空间 */
+}
+
+/* --- 自定义导航栏 --- */
+.custom-nav {
+  position: fixed;
   top: 0;
-  z-index: 100;
-  background-color: var(--background);
-  /* 增加一点底部边框或阴影增加层次感 (可选) */
-  border-bottom: var(--border-width) solid transparent; 
-  padding: 12rpx 0 24rpx 0;
-  
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--background); /* 与背景同色 */
+  /* 可以加个底边框区分 */
+  /* border-bottom: 2rpx solid rgba(0,0,0,0.05); */
+}
+
+.nav-content {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 24rpx;
+  position: relative;
 }
 
-/* 左侧搜索图标区域 */
-.search-icon-wrapper {
-  width: 80rpx;
-  height: 80rpx;
+.nav-left, .nav-right {
+  width: 60rpx; /* 左右同宽，保证标题居中 */
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-right: 12rpx;
-  background-color: #fff;
-  border: var(--border-width) solid var(--border-color);
-  border-radius: 50%; /* 圆形按钮风格 */
-  box-shadow: 4rpx 4rpx 0 0 var(--border-color);
-  flex-shrink: 0; /* 防止被挤压 */
 }
 
-.search-icon-wrapper:active {
-  transform: translate(2rpx, 2rpx);
-  box-shadow: 2rpx 2rpx 0 0 var(--border-color);
+.nav-title {
+  font-size: 34rpx;
+  font-weight: 900; /* 粗体 */
+  color: #1A1A1A;
+  letter-spacing: 2rpx;
+  font-family: 'Impact', fantasy, sans-serif;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* 绝对居中 */
 }
 
-/* 右侧 Tabs 滚动区域 */
+/* --- 分类 Tabs --- */
 .tabs-scroll {
-  flex: 1;
   height: 80rpx;
-  overflow: hidden; /* 隐藏滚动条 */
+  background: var(--background);
+  position: sticky; /* 吸附在自定义导航栏下方 */
+  z-index: 99;
 }
 
 .tabs-container {
   display: flex;
   align-items: center;
+  padding: 0 24rpx;
   height: 100%;
-  padding-right: 24rpx;
 }
 
 .tab-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 64rpx;
-  padding: 0 32rpx;
-  margin-right: 16rpx;
+  padding: 10rpx 30rpx;
   font-size: 28rpx;
-  font-weight: bold;
   color: #666;
-  border: var(--border-width) solid transparent;
-  border-radius: 999rpx; /* 胶囊圆角 */
-  transition: all 0.2s;
+  font-weight: bold;
+  border-radius: 999rpx;
+  margin-right: 16rpx;
+  border: 4rpx solid transparent;
   white-space: nowrap;
-  background-color: transparent;
 }
 
-/* 选中状态：孟菲斯风格高亮 */
+/* 选中态：黄色贴纸风格 */
 .tab-item.active {
-  color: var(--text-main);
-  background-color: var(--accent); /* 连翘黄 */
-  border-color: var(--border-color);
-  box-shadow: 4rpx 4rpx 0 0 var(--border-color);
+  background-color: #FFD93D;
+  color: #1A1A1A;
+  border: 4rpx solid #000;
+  box-shadow: 4rpx 4rpx 0 0 #000;
   transform: translate(-2rpx, -2rpx);
 }
 
-/* 瀑布流容器 */
+/* --- 瀑布流 --- */
 .waterfall-container {
   display: flex;
   justify-content: space-between;
+  padding: 24rpx 12rpx;
   align-items: flex-start;
-  margin-top: 24rpx;
-  padding: 0 12rpx; /* 微调左右间距 */
 }
 
 .column {
   width: 48%;
-  display: flex;
-  flex-direction: column;
 }

@@ -1,8 +1,18 @@
 <view class="container page-home">
-  <view class="header-section">
-    <view class="search-icon-wrapper" bindtap="onSearch">
-      <icon type="search" size="22" color="#1A1A1A"/>
+  
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px; height: {{navBarHeight}}px;">
+    <view class="nav-content">
+      <view class="nav-left" bindtap="onSearch">
+        <icon type="search" size="20" color="#1A1A1A"/>
+      </view>
+
+      <view class="nav-title">1956 | BUCM</view>
+
+      <view class="nav-right"></view>
     </view>
+  </view>
+
+  <view class="scroll-content" style="padding-top: {{statusBarHeight + navBarHeight}}px;">
     
     <scroll-view scroll-x class="tabs-scroll" enable-flex show-scrollbar="{{false}}">
       <view class="tabs-container">
@@ -17,32 +27,19 @@
         </view>
       </view>
     </scroll-view>
-  </view>
 
-  <view class="waterfall-container">
-    <view class="column">
-      <block wx:for="{{leftList}}" wx:key="id">
-        <neo-card 
-          title="{{item.title}}" 
-          cover="{{item.cover}}" 
-          avatar="{{item.avatar}}"
-          nickname="{{item.nickname}}"
-          likes="{{item.likes}}"
-          isLiked="{{item.isLiked}}"
-        />
-      </block>
+    <view class="waterfall-container">
+      <view class="column">
+        <block wx:for="{{leftList}}" wx:key="id">
+          <neo-card title="{{item.title}}" cover="{{item.cover}}" nickname="{{item.nickname}}" likes="{{item.likes}}" isLiked="{{item.isLiked}}"/>
+        </block>
+      </view>
+      <view class="column">
+        <block wx:for="{{rightList}}" wx:key="id">
+          <neo-card title="{{item.title}}" cover="{{item.cover}}" nickname="{{item.nickname}}" likes="{{item.likes}}" isLiked="{{item.isLiked}}"/>
+        </block>
+      </view>
     </view>
-    <view class="column">
-      <block wx:for="{{rightList}}" wx:key="id">
-        <neo-card 
-          title="{{item.title}}" 
-          cover="{{item.cover}}" 
-          avatar="{{item.avatar}}"
-          nickname="{{item.nickname}}"
-          likes="{{item.likes}}"
-          isLiked="{{item.isLiked}}"
-        />
-      </block>
-    </view>
+
   </view>
 </view>

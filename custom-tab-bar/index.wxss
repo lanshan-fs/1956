@@ -1,0 +1,59 @@
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 96rpx; /* 稍微高一点 */
+  background: #FFFDF5;
+  display: flex;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 4rpx solid #000; /* 粗框 */
+  z-index: 9999;
+}
+
+.tab-bar-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.tab-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.tab-text {
+  font-size: 20rpx;
+  margin-top: 6rpx;
+  font-weight: bold;
+  color: #1A1A1A;
+}
+
+.tab-text.selected {
+  color: #FF4D4D;
+}
+
+/* === 中间的大按钮样式 === */
+.add-btn-wrapper {
+  width: 90rpx;
+  height: 90rpx;
+  background-color: #FF4D4D; /* 官方红底 */
+  border: 4rpx solid #000;   /* 粗黑边 */
+  border-radius: 24rpx;      /* 圆角矩形 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -30rpx;        /* 向上突出一半 */
+  box-shadow: 4rpx 4rpx 0 0 #000; /* 硬阴影 */
+}
+
+.add-icon-text {
+  color: #fff;
+  font-size: 60rpx;
+  line-height: 1;
+  font-weight: 300;
+  margin-top: -8rpx;
+}

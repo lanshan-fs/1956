@@ -1,8 +1,6 @@
 {
-  "navigationBarTitleText": "1956 | BUCM",
-  "navigationBarBackgroundColor": "#FFFDF5",
-  "navigationBarTextStyle": "black",
-  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "1956",
+  "navigationStyle": "custom", 
   "usingComponents": {
     "neo-card": "/components/neo-card/neo-card"
   }
