@@ -1,59 +1,61 @@
 .tab-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 96rpx; /* 稍微高一点 */
-  background: #FFFDF5;
-  display: flex;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 96rpx; background: #FFFDF5; display: flex;
   padding-bottom: env(safe-area-inset-bottom);
-  border-top: 4rpx solid #000; /* 粗框 */
-  z-index: 9999;
+  border-top: 4rpx solid #000; z-index: 9999;
 }
 
 .tab-bar-item {
-  flex: 1;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex: 1; text-align: center; display: flex; justify-content: center; align-items: center; flex-direction: column;
 }
 
-.tab-icon {
-  width: 50rpx;
-  height: 50rpx;
-}
+.tab-icon { width: 50rpx; height: 50rpx; }
+.tab-text { font-size: 20rpx; margin-top: 6rpx; font-weight: bold; color: #1A1A1A; }
+.tab-text.selected { color: #FF4D4D; }
 
-.tab-text {
-  font-size: 20rpx;
-  margin-top: 6rpx;
-  font-weight: bold;
-  color: #1A1A1A;
-}
-
-.tab-text.selected {
-  color: #FF4D4D;
-}
-
-/* === 中间的大按钮样式 === */
+/* === 优化后的发布按钮 === */
 .add-btn-wrapper {
-  width: 90rpx;
-  height: 90rpx;
-  background-color: #FF4D4D; /* 官方红底 */
-  border: 4rpx solid #000;   /* 粗黑边 */
-  border-radius: 24rpx;      /* 圆角矩形 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -30rpx;        /* 向上突出一半 */
-  box-shadow: 4rpx 4rpx 0 0 #000; /* 硬阴影 */
+  width: 96rpx; height: 84rpx; /* 稍微宽一点，呈方圆形 */
+  background-color: #FF4D4D;   /* 官方红 */
+  border: 4rpx solid #000;     /* 统一边框粗细 */
+  border-radius: 20rpx;        /* 适度圆角 */
+  
+  display: flex; align-items: center; justify-content: center;
+  
+  /* 向上悬浮 */
+  margin-top: -40rpx; 
+  
+  /* 紧凑的硬阴影，不那么发散 */
+  box-shadow: 4rpx 4rpx 0 0 #000; 
+  
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
-.add-icon-text {
-  color: #fff;
-  font-size: 60rpx;
-  line-height: 1;
-  font-weight: 300;
-  margin-top: -8rpx;
+/* 点击下压效果 */
+.add-btn-wrapper:active {
+  transform: translate(4rpx, 4rpx);
+  box-shadow: 0 0 0 0 #000;
+}
+
+/* 纯 CSS 绘制白色加号 */
+.add-icon-css {
+  position: relative;
+  width: 32rpx; height: 32rpx;
+}
+
+.add-icon-css::before,
+.add-icon-css::after {
+  content: ""; position: absolute; background-color: #fff;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  border-radius: 4rpx; /* 线条端点圆润一点 */
+}
+
+/* 横线 */
+.add-icon-css::before {
+  width: 100%; height: 6rpx;
+}
+
+/* 竖线 */
+.add-icon-css::after {
+  width: 6rpx; height: 100%;
 }

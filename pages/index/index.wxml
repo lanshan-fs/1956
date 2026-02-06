@@ -5,28 +5,65 @@
       <view class="nav-left" bindtap="onSearch">
         <icon type="search" size="20" color="#1A1A1A"/>
       </view>
-
       <view class="nav-title">1956 | BUCM</view>
-
-      <view class="nav-right"></view>
-    </view>
+      <view class="nav-right"></view> </view>
   </view>
 
   <view class="scroll-content" style="padding-top: {{statusBarHeight + navBarHeight}}px;">
     
-    <scroll-view scroll-x class="tabs-scroll" enable-flex show-scrollbar="{{false}}">
-      <view class="tabs-container">
-        <view 
-          wx:for="{{tabs}}" 
-          wx:key="id" 
-          class="tab-item {{currentTab === index ? 'active' : ''}}"
-          bindtap="switchTab"
-          data-index="{{index}}"
-        >
-          {{item.name}}
+    <view class="tabs-section">
+      <scroll-view 
+        scroll-x 
+        class="tabs-scroll" 
+        enable-flex 
+        scroll-into-view="tab-{{currentTab > 2 ? currentTab - 2 : 0}}"
+        show-scrollbar="{{false}}"
+      >
+        <view class="tabs-container">
+          <view 
+            wx:for="{{tabs}}" 
+            wx:key="id" 
+            id="tab-{{index}}"
+            class="tab-item {{currentTab === index ? 'active' : ''}}"
+            bindtap="switchTab"
+            data-index="{{index}}"
+          >
+            {{item.name}}
+          </view>
+          <view style="width: 80rpx; flex-shrink: 0;"></view>
+        </view>
+      </scroll-view>
+
+      <view class="tabs-more-btn {{showChannelPopup ? 'open' : ''}}" bindtap="toggleChannelPopup">
+        <view class="icon-chevron"></view>
+      </view>
+    </view>
+
+    <view class="channel-popup-mask {{showChannelPopup ? 'show' : ''}}" bindtap="toggleChannelPopup" catchtouchmove="true">
+      <view 
+        class="channel-popup-body" 
+        catchtap="stopProp"
+        style="top: {{statusBarHeight + navBarHeight}}px;"
+      >
+        <view class="popup-header">
+          <text>我的频道</text>
+          <view class="popup-close" bindtap="toggleChannelPopup">
+            <view class="icon-close"></view>
+          </view>
+        </view>
+        <view class="popup-grid">
+          <view 
+            wx:for="{{tabs}}" 
+            wx:key="id" 
+            class="popup-item {{currentTab === index ? 'active' : ''}}"
+            bindtap="switchTab"
+            data-index="{{index}}"
+          >
+            {{item.name}}
+          </view>
         </view>
       </view>
-    </scroll-view>
+    </view>
 
     <view class="waterfall-container">
       <view class="column">

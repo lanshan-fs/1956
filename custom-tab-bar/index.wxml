@@ -5,9 +5,7 @@
     
     <block wx:if="{{index === 2}}">
       <view class="add-btn-wrapper">
-        <view class="add-btn-inner">
-          <view class="add-icon-cross">+</view>
-        </view>
+        <view class="add-icon-css"></view>
       </view>
     </block>
     
