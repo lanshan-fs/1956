@@ -1,12 +1,41 @@
 Component({
   data: {
     selected: 0,
+    color: "#7A7E83",
+    selectedColor: "#3cc51f",
+    // 确保你的 list 顺序如下，中间第3个（索引为2）是发布按钮
     list: [
-      { pagePath: "/pages/index/index", text: "首页", iconPath: "/images/tab_home.png", selectedIconPath: "/images/tab_home_active.png" },
-      { pagePath: "/pages/market/market", text: "集市", iconPath: "/images/tab_market.png", selectedIconPath: "/images/tab_market_active.png" },
-      { pagePath: "/pages/post/post", text: "" }, 
-      { pagePath: "/pages/notice/notice", text: "公告", iconPath: "/images/tab_notice.png", selectedIconPath: "/images/tab_notice_active.png" },
-      { pagePath: "/pages/profile/profile", text: "个人", iconPath: "/images/tab_profile.png", selectedIconPath: "/images/tab_profile_active.png" }
+      {
+        pagePath: "/pages/index/index",
+        iconPath: "/images/tab_home.png",
+        selectedIconPath: "/images/tab_home_active.png",
+        text: "首页"
+      },
+      {
+        pagePath: "/pages/market/market",
+        iconPath: "/images/tab_market.png",
+        selectedIconPath: "/images/tab_market_active.png",
+        text: "集市"
+      },
+      {
+        // 这里的 path 写什么不重要，因为我们会拦截它，但不能为空，防止报错
+        pagePath: "/pages/post/post", 
+        iconPath: "/images/tab_add.png",
+        selectedIconPath: "/images/tab_add.png",
+        text: "+"
+      },
+      {
+        pagePath: "/pages/notice/notice",
+        iconPath: "/images/tab_notice.png",
+        selectedIconPath: "/images/tab_notice_active.png",
+        text: "消息"
+      },
+      {
+        pagePath: "/pages/profile/profile",
+        iconPath: "/images/tab_profile.png",
+        selectedIconPath: "/images/tab_profile_active.png",
+        text: "我的"
+      }
     ]
   },
   methods: {
@@ -15,18 +44,29 @@ Component({
       const url = data.path
       const index = data.index
 
-      // 假设第 2 个索引 (index === 2) 是发布按钮
-      // 或者判断 url 是否为空/特定标识
-      if (index === 2) { 
-        // 核心：点击“+”时，使用 navigateTo 跳转，而不是 switchTab
+      // === 核心修复代码开始 ===
+      
+      // 判断点击的是中间的 "+" 按钮（索引为 2）
+      if (index === 2) {
         wx.navigateTo({
-          url: '/pages/post/post'
+          url: '/pages/post/post',
+          fail: (err) => {
+            console.error('跳转失败:', err)
+            wx.showToast({ title: '跳转失败，请检查路径', icon: 'none' })
+          }
         })
-      } else {
-        // 普通 Tab 切换
-        wx.switchTab({ url })
-        this.setData({ selected: index })
+        return // ！！！关键：阻止代码继续往下执行 switchTab
       }
+
+      // === 核心修复代码结束 ===
+
+      // 正常的 Tab 切换逻辑
+      wx.switchTab({
+        url,
+        success: () => {
+          this.setData({ selected: index })
+        }
+      })
     }
   }
 })

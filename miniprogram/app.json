@@ -32,12 +32,6 @@
         "selectedIconPath": "images/tab_market_active.png"
       },
       {
-        "pagePath": "pages/post/post",
-        "text": "",  
-        "iconPath": "images/tab_add.png",
-        "selectedIconPath": "images/tab_add.png"
-      },
-      {
         "pagePath": "pages/notice/notice",
         "text": "公告",
         "iconPath": "images/tab_notice.png",
