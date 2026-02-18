@@ -1,4 +1,4 @@
-<navigation-bar title="发布动态" back="{{true}}" color="#000" background="#fff"></navigation-bar>
+<neo-nav title="发布动态" back="{{true}}" color="#000" background="#fff"></neo-nav>
 
 <view class="container">
   <view class="neo-card input-box">

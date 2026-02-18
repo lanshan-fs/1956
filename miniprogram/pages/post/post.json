@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "neo-nav": "/components/navigation-bar/navigation-bar", 
+    "neo-card": "/components/neo-card/neo-card"
+  }
 }
