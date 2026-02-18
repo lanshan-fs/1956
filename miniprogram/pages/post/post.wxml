@@ -1,2 +1,49 @@
-<!--pages/post/post.wxml-->
-<text>pages/post/post.wxml</text>
+<navigation-bar title="发布动态" back="{{true}}" color="#000" background="#fff"></navigation-bar>
+
+<view class="container">
+  <view class="neo-card input-box">
+    <textarea 
+      class="post-input" 
+      placeholder="在北中医分享你的新鲜事..." 
+      placeholder-style="color:#888;font-weight:bold;"
+      maxlength="1000"
+      bindinput="onContentInput"
+    ></textarea>
+  </view>
+
+  <view class="media-section">
+    <view class="grid-3">
+      <block wx:for="{{tempImages}}" wx:key="*this">
+        <view class="grid-item neo-img-box">
+          <image src="{{item}}" mode="aspectFill" class="uploaded-img"></image>
+          <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">×</view>
+        </view>
+      </block>
+      <view class="grid-item add-btn neo-box" bindtap="chooseImage" wx:if="{{tempImages.length < 9}}">
+        <text class="plus-icon">+</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tags-section">
+    <view class="section-title">选择话题 #</view>
+    <view class="tag-list">
+      <block wx:for="{{availableTags}}" wx:key="id">
+        <view 
+          class="neo-tag {{selectedTag === item.name ? 'active' : ''}}" 
+          bindtap="selectTag" 
+          data-tag="{{item.name}}"
+          style="background: {{item.color}}"
+        >
+          {{item.name}}
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="footer-action">
+    <button class="neo-button publish-btn" bindtap="submitPost" loading="{{submitting}}">
+      立即发布
+    </button>
+  </view>
+</view>
