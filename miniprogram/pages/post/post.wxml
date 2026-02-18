@@ -8,6 +8,7 @@
       placeholder-style="color:#888;font-weight:bold;"
       maxlength="1000"
       bindinput="onContentInput"
+      value="{{content}}"
     ></textarea>
   </view>
 
@@ -19,6 +20,7 @@
           <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">×</view>
         </view>
       </block>
+      
       <view class="grid-item add-btn neo-box" bindtap="chooseImage" wx:if="{{tempImages.length < 9}}">
         <text class="plus-icon">+</text>
       </view>
@@ -28,12 +30,12 @@
   <view class="tags-section">
     <view class="section-title">选择话题 #</view>
     <view class="tag-list">
-      <block wx:for="{{availableTags}}" wx:key="id">
+      <block wx:for="{{availableTags}}" wx:key="name">
         <view 
           class="neo-tag {{selectedTag === item.name ? 'active' : ''}}" 
           bindtap="selectTag" 
           data-tag="{{item.name}}"
-          style="background: {{item.color}}"
+          style="{{selectedTag === item.name ? 'background:' + item.color : ''}}"
         >
           {{item.name}}
         </view>
@@ -42,7 +44,12 @@
   </view>
 
   <view class="footer-action">
-    <button class="neo-button publish-btn" bindtap="submitPost" loading="{{submitting}}">
+    <button 
+      class="neo-button publish-btn" 
+      bindtap="submitPost" 
+      disabled="{{submitting}}"
+      loading="{{submitting}}"
+    >
       立即发布
     </button>
   </view>
