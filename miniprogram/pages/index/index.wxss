@@ -14,9 +14,8 @@ page {
   width: 100%;
   z-index: 1000;
   background-color: var(--background);
-  /* 增加标志性黑线 */
   border-bottom: var(--border-width) solid var(--border-color);
-  box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.03); /* 极细微投影 */
+  box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.03);
 }
 
 .nav-content {
@@ -46,20 +45,20 @@ page {
   transform: translateX(-50%);
 }
 
-/* === Block 2: Tabs Section (精准合拢方案) === */
+/* === Block 2: Tabs Section (Flex 布局修复错位) === */
 .tabs-section {
-  position: sticky; 
-  /* 吸附位置由 wxml 的 stickyTop 计算提供 */
-  z-index: 99; 
+  position: sticky;
+  z-index: 99;
   background-color: var(--background);
-  display: flex;
+  display: flex; /* 关键：Flex 布局 */
   align-items: center;
-  /* 标签栏底部的细灰线 */
   border-bottom: 2rpx solid #EAEAEA;
+  box-sizing: border-box;
 }
 
 .tabs-scroll {
-  flex: 1;
+  flex: 1; /* 占据剩余空间 */
+  width: 0; /* 防止被子元素撑开 */
   height: 100%;
   white-space: nowrap;
 }
@@ -72,35 +71,45 @@ page {
 }
 
 .tab-item {
-  padding: 8rpx 20rpx;
-  font-size: 26rpx; /* 字体微调小 */
+  /* 视觉瘦身：更紧凑的 Padding */
+  padding: 6rpx 24rpx; 
+  font-size: 26rpx;
   color: #666;
   font-weight: bold;
   border-radius: 999rpx;
-  margin-right: 8rpx;
-  border: 4rpx solid transparent;
+  margin-right: 12rpx;
+  border: 2rpx solid transparent; /* 预留边框位置防止抖动 */
   transition: all 0.2s;
+  box-sizing: border-box;
+  flex-shrink: 0; /* 防止挤压 */
+  
+  /* 确保垂直居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tab-item.active {
-  background-color: #FFD93D;
+  background-color: #FFD93D; /* 保持黄色高亮 */
   color: #1A1A1A;
-  border: 4rpx solid #000;
-  box-shadow: 4rpx 4rpx 0 0 #000;
-  transform: translate(-2rpx, -2rpx);
+  border: 2rpx solid #000;
+  font-weight: 800;
+  box-shadow: 2rpx 2rpx 0 0 #000; /* 锐利的投影 */
+  transform: translate(-1rpx, -1rpx);
 }
 
+/* 更多/编辑按钮 (Flex Item) */
 .tabs-more-btn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 70rpx;
+  width: 80rpx; /* 固定宽度 */
+  height: 100%;
   background-color: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 102;
+  position: relative; /* 为了阴影 */
+  /* 左侧分隔阴影，增强层级感 */
+  box-shadow: -10rpx 0 20rpx -10rpx rgba(0,0,0,0.1); 
 }
 
 .icon-chevron {
@@ -109,8 +118,8 @@ page {
   border-right: 3.5rpx solid #1A1A1A;
   border-bottom: 3.5rpx solid #1A1A1A;
   transform: rotate(45deg);
-  margin-top: -4rpx;
   transition: transform 0.3s;
+  margin-top: -4rpx;
 }
 
 .tabs-more-btn.open .icon-chevron {
@@ -118,7 +127,7 @@ page {
   margin-top: 4rpx;
 }
 
-/* === 频道下拉面板 (网格修复) === */
+/* === 频道下拉面板 (重构) === */
 .channel-popup-mask {
   position: fixed;
   top: 0;
@@ -126,7 +135,7 @@ page {
   right: 0;
   bottom: 0;
   background: rgba(0,0,0,0.5);
-  z-index: 200; 
+  z-index: 200;
   display: none;
   opacity: 0;
   transition: opacity 0.2s;
@@ -142,34 +151,59 @@ page {
   left: 0;
   right: 0;
   background: var(--background);
-  padding: 30rpx 24rpx 50rpx;
+  padding: 0 24rpx 50rpx;
   border-bottom: var(--border-width) solid var(--border-color);
-  border-radius: 0 0 40rpx 40rpx;
-  box-shadow: 0 20rpx 40rpx rgba(0,0,0,0.1);
+  border-radius: 0 0 32rpx 32rpx;
+  box-shadow: 0 20rpx 40rpx rgba(0,0,0,0.15);
+  max-height: 70vh; /* 防止过高 */
+  overflow-y: auto;
+}
+
+/* Section 样式 */
+.popup-section {
+  margin-top: 30rpx;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.popup-title-group {
+  display: flex;
+  align-items: baseline;
 }
 
 .p-main-title {
-  font-size: 32rpx;
+  font-size: 30rpx;
   font-weight: 900;
-  color: var(--text-main);
+  color: #1A1A1A;
   margin-right: 16rpx;
 }
 
 .p-sub-title {
   font-size: 22rpx;
   color: #999;
-  font-weight: 500;
 }
 
 .popup-edit-btn {
   font-size: 24rpx;
   color: var(--primary);
-  font-weight: 900;
-  padding: 8rpx 24rpx;
+  font-weight: 700;
+  padding: 6rpx 20rpx;
   border: 2rpx solid var(--primary);
   border-radius: 999rpx;
+  transition: all 0.2s;
 }
 
+.popup-edit-btn.editing {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+/* Grid 布局 */
 .popup-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -177,34 +211,86 @@ page {
 }
 
 .popup-item {
+  position: relative;
   width: 100%;
-  text-align: center;
-  padding: 20rpx 0;
+  height: 64rpx; /* 固定高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fff;
-  border: var(--border-width) solid #eee;
-  border-radius: 12rpx;
+  border: 2rpx solid #eee;
+  border-radius: 8rpx;
   transition: all 0.2s;
   box-sizing: border-box;
 }
 
 .popup-item.active {
-  background: var(--accent);
-  border-color: var(--border-color);
-  color: var(--text-main);
-  box-shadow: 4rpx 4rpx 0 0 var(--border-color);
-  transform: translate(-2rpx, -2rpx);
+  background: #FFD93D;
+  border-color: #000;
+  color: #1A1A1A;
+  font-weight: 800;
+}
+
+/* 编辑模式下的抖动动画 */
+.popup-item.shake {
+  animation: shake 0.3s infinite ease-in-out alternate;
+}
+
+@keyframes shake {
+  from { transform: rotate(-1deg); }
+  to { transform: rotate(1deg); }
+}
+
+/* 移除图标 */
+.icon-remove {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  width: 28rpx;
+  height: 28rpx;
+  background: #ccc;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.icon-remove .line {
+  width: 16rpx;
+  height: 4rpx;
+  background: #fff;
+}
+
+/* 推荐频道样式 */
+.popup-item.recommend {
+  background: #FAFAFA;
+  border: 2rpx dashed #ccc; /* 虚线表示待添加 */
+  color: #666;
+}
+
+.icon-add {
+  font-size: 32rpx;
+  font-weight: 300;
+  margin-right: 4rpx;
+  margin-top: -4rpx;
 }
 
 .p-item-text {
-  font-size: 26rpx;
-  font-weight: 800;
+  font-size: 24rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4rpx;
 }
 
 /* === Block 3: Waterfall (还原对称间距) === */
 .waterfall-container {
   display: flex;
   justify-content: space-between;
-  padding: 12rpx; /* 对称 12rpx */
+  padding: 12rpx; 
   align-items: flex-start;
   background-color: var(--background);
 }

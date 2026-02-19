@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "neo-card": "../../components/neo-card/neo-card"
+  },
+  "navigationStyle": "custom"
+}

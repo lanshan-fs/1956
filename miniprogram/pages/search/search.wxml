@@ -1,0 +1,118 @@
+<view class="container page-search">
+  
+  <!-- 自定义导航栏 -->
+  <view class="search-nav" style="height: {{navTotalHeight}}px;">
+    <view class="nav-content-wrapper" style="top: {{navContentTop}}px; height: {{navContentHeight}}px;">
+      
+      <!-- 返回按钮 -->
+      <view class="nav-left" bindtap="onNavBack">
+        <view class="icon-back"></view>
+      </view>
+      
+      <!-- 搜索输入框 -->
+      <view class="search-input-box" style="margin-right: {{searchBarRight}}px;">
+        <view class="icon-search">🔍</view>
+        <input 
+          class="real-input" 
+          placeholder="搜索校区/课程/生活..." 
+          value="{{keyword}}"
+          bindinput="onInput"
+          bindconfirm="onSearch"
+          confirm-type="search"
+          adjust-position="{{true}}"
+          focus="{{true}}"
+        />
+        <view class="icon-clear" bindtap="onClearInput" wx:if="{{keyword}}">×</view>
+      </view>
+
+    </view>
+  </view>
+
+  <!-- 内容区 -->
+  <scroll-view 
+    scroll-y 
+    class="search-scroll" 
+    style="padding-top: {{navTotalHeight}}px;"
+  >
+    
+    <!-- 默认展示：历史记录 + 热搜 -->
+    <view class="default-view" wx:if="{{!showResult}}">
+      
+      <!-- 历史记录 -->
+      <view class="section-block" wx:if="{{historyList.length > 0}}">
+        <view class="section-header">
+          <text class="title">历史记录</text>
+          <view class="icon-delete" bindtap="onClearHistory">🗑</view>
+        </view>
+        <view class="tags-wrapper">
+          <view 
+            class="neo-tag history" 
+            wx:for="{{historyList}}" 
+            wx:key="*this"
+            bindtap="onTagSearch"
+            data-text="{{item}}"
+          >{{item}}</view>
+        </view>
+      </view>
+
+      <!-- 热搜榜 -->
+      <view class="section-block">
+        <view class="section-header">
+          <text class="title">热门搜索 🔥</text>
+        </view>
+        <view class="hot-list">
+          <view 
+            class="hot-item" 
+            wx:for="{{hotList}}" 
+            wx:key="id"
+            bindtap="onTagSearch"
+            data-text="{{item.text}}"
+          >
+            <view class="rank-num {{index < 3 ? 'top' : ''}}">{{index + 1}}</view>
+            <text class="hot-text">{{item.text}}</text>
+            <view class="hot-tag {{item.tag}}" wx:if="{{item.tag}}">{{item.tag === 'new' ? '新' : '热'}}</view>
+          </view>
+        </view>
+      </view>
+    
+    </view>
+
+    <!-- 搜索结果：瀑布流 -->
+    <view class="result-view" wx:else>
+      <view class="waterfall-container">
+        <view class="column">
+          <block wx:for="{{resultLeft}}" wx:key="id">
+            <neo-card 
+              title="{{item.title}}" 
+              cover="{{item.cover}}" 
+              nickname="{{item.nickname}}" 
+              likes="{{item.likes}}" 
+              isLiked="{{item.isLiked}}"
+              bind:click="onCardClick"
+              data-id="{{item.id}}"
+            />
+          </block>
+        </view>
+        <view class="column">
+          <block wx:for="{{resultRight}}" wx:key="id">
+            <neo-card 
+              title="{{item.title}}" 
+              cover="{{item.cover}}" 
+              nickname="{{item.nickname}}" 
+              likes="{{item.likes}}" 
+              isLiked="{{item.isLiked}}"
+              bind:click="onCardClick"
+              data-id="{{item.id}}"
+            />
+          </block>
+        </view>
+      </view>
+      
+      <!-- 空结果提示 -->
+      <view class="empty-result" wx:if="{{resultLeft.length === 0 && resultRight.length === 0}}">
+        <text>换个关键词试试吧~</text>
+      </view>
+    </view>
+
+  </scroll-view>
+</view>

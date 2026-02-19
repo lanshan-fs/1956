@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/search/search",
+    "pages/post-detail/post-detail",
     "pages/market/market",
     "pages/post/post",
     "pages/notice/notice",

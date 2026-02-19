@@ -1,19 +1,21 @@
 <view class="container page-home">
   
+  <!-- Block 1: 顶部导航栏 -->
   <view class="custom-nav" style="padding-top: {{statusBarHeight}}px; height: {{navBarHeight}}px;">
     <view class="nav-content">
       <view class="nav-left" bindtap="onSearch">
         <icon type="search" size="20" color="#1A1A1A"/>
       </view>
       <view class="nav-title">1956 | BUCM</view>
-      <view class="nav-right"></view> </view>
+      <view class="nav-right"></view> <!-- 占位保持居中 -->
+    </view>
   </view>
 
-  <!-- 内容区 PaddingTop 只需要导航栏高度 -->
+  <!-- 内容区 PaddingTop -->
   <view class="scroll-content" style="padding-top: {{navHeaderHeight}}px;">
     
-    <!-- 标签栏 -->
-    <view class="tabs-section" style="top: {{stickyTop}}px; height: {{tabHeight}}px;">
+    <!-- Block 2: 标签栏 (Flex 布局修复错位) -->
+    <view class="tabs-section" style="top: {{navHeaderHeight}}px; height: {{tabHeight}}px;">
       <scroll-view 
         scroll-x 
         class="tabs-scroll" 
@@ -26,7 +28,7 @@
       >
         <view class="tabs-container">
           <view 
-            wx:for="{{tabs}}" 
+            wx:for="{{myChannels}}" 
             wx:key="id" 
             id="tab-{{index}}"
             class="tab-item {{currentTab === index ? 'active' : ''}}"
@@ -35,53 +37,106 @@
           >
             {{item.name}}
           </view>
-          <view style="width: 80rpx; flex-shrink: 0;"></view>
+          <!-- 尾部占位，防止最后一个被遮挡 -->
+          <view style="width: 24rpx; flex-shrink: 0;"></view>
         </view>
       </scroll-view>
 
+      <!-- 更多/编辑按钮 (Flex Item) -->
       <view class="tabs-more-btn {{showChannelPopup ? 'open' : ''}}" bindtap="toggleChannelPopup">
         <view class="icon-chevron"></view>
       </view>
     </view>
 
-    <!-- 频道弹窗 -->
+    <!-- 频道管理弹窗 -->
     <view class="channel-popup-mask {{showChannelPopup ? 'show' : ''}}" bindtap="toggleChannelPopup" catchtouchmove="true">
       <view 
         class="channel-popup-body" 
         catchtap="stopProp"
         style="top: {{navHeaderHeight}}px;"
       >
-        <view class="popup-header">
-          <view class="popup-title-group">
-            <text class="p-main-title">我的频道</text>
-            <text class="p-sub-title">点击进入频道</text>
+        <!-- Section 1: 我的频道 -->
+        <view class="popup-section">
+          <view class="popup-header">
+            <view class="popup-title-group">
+              <text class="p-main-title">我的频道</text>
+              <text class="p-sub-title">{{isEditMode ? '点击移除频道' : '点击进入频道'}}</text>
+            </view>
+            <view class="popup-edit-btn {{isEditMode ? 'editing' : ''}}" catchtap="toggleEditMode">
+              {{isEditMode ? '完成' : '编辑'}}
+            </view>
           </view>
-          <view class="popup-edit-btn" catchtap="onEditChannels">编辑</view>
-        </view>
-        <view class="popup-grid">
-          <view 
-            wx:for="{{tabs}}" 
-            wx:key="id" 
-            class="popup-item {{currentTab === index ? 'active' : ''}}"
-            bindtap="switchTab"
-            data-index="{{index}}"
-          >
-            <text class="p-item-text">{{item.name}}</text>
+          
+          <view class="popup-grid">
+            <view 
+              wx:for="{{myChannels}}" 
+              wx:key="id" 
+              class="popup-item {{currentTab === index ? 'active' : ''}} {{isEditMode && index !== 0 ? 'shake' : ''}}"
+              catchtap="{{isEditMode ? 'removeChannel' : 'switchTab'}}"
+              data-index="{{index}}"
+              data-popup="{{true}}"
+            >
+              <text class="p-item-text">{{item.name}}</text>
+              <!-- 移除图标 (仅编辑模式 && 非全部) -->
+              <view wx:if="{{isEditMode && index !== 0}}" class="icon-remove">
+                <view class="line"></view>
+              </view>
+            </view>
           </view>
         </view>
+
+        <!-- Section 2: 推荐频道 -->
+        <view class="popup-section">
+          <view class="popup-header">
+            <view class="popup-title-group">
+              <text class="p-main-title">推荐频道</text>
+              <text class="p-sub-title">点击添加频道</text>
+            </view>
+          </view>
+          
+          <view class="popup-grid">
+            <view 
+              wx:for="{{recommendChannels}}" 
+              wx:key="id" 
+              class="popup-item recommend"
+              catchtap="addChannel"
+              data-index="{{index}}"
+            >
+              <view class="icon-add">+</view>
+              <text class="p-item-text">{{item.name}}</text>
+            </view>
+          </view>
+        </view>
+
       </view>
     </view>
 
-    <!-- 瀑布流：还原对称布局 -->
+    <!-- Block 3: 瀑布流 -->
     <view class="waterfall-container">
       <view class="column">
         <block wx:for="{{leftList}}" wx:key="id">
-          <neo-card title="{{item.title}}" cover="{{item.cover}}" nickname="{{item.nickname}}" likes="{{item.likes}}" isLiked="{{item.isLiked}}"/>
+          <neo-card 
+            title="{{item.title}}" 
+            cover="{{item.cover}}" 
+            nickname="{{item.nickname}}" 
+            likes="{{item.likes}}" 
+            isLiked="{{item.isLiked}}"
+            bind:click="onCardClick"
+            data-id="{{item.id}}"
+          />
         </block>
       </view>
       <view class="column">
         <block wx:for="{{rightList}}" wx:key="id">
-          <neo-card title="{{item.title}}" cover="{{item.cover}}" nickname="{{item.nickname}}" likes="{{item.likes}}" isLiked="{{item.isLiked}}"/>
+          <neo-card 
+            title="{{item.title}}" 
+            cover="{{item.cover}}" 
+            nickname="{{item.nickname}}" 
+            likes="{{item.likes}}" 
+            isLiked="{{item.isLiked}}"
+            bind:click="onCardClick"
+            data-id="{{item.id}}"
+          />
         </block>
       </view>
     </view>

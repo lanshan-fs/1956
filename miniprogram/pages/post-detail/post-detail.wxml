@@ -1,0 +1,153 @@
+<view class="container page-detail">
+  <!-- 1. 自定义导航栏 -->
+  <view class="detail-nav" style="height: {{navTotalHeight}}px;">
+    <!-- 导航内容区：垂直定位到胶囊位置 -->
+    <view class="nav-content-wrapper" style="top: {{navContentTop}}px; height: {{navContentHeight}}px;">
+      
+      <view class="nav-left" bindtap="onNavBack">
+        <view class="icon-back"></view>
+      </view>
+      
+      <view class="nav-center user-mini-profile">
+        <image class="mini-avatar" src="{{post.userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <text class="mini-name">{{post.userInfo.nickname}}</text>
+        <view class="mini-follow-btn {{post.userInfo.isFollowed ? 'followed' : ''}}" catchtap="toggleFollow" wx:if="{{!post.userInfo.isFollowed}}">
+          关注
+        </view>
+      </view>
+      
+      <!-- 右侧空出位置给胶囊 -->
+      <view class="nav-right-placeholder"></view>
+
+    </view>
+  </view>
+
+  <!-- 滚动内容区 -->
+  <scroll-view 
+    scroll-y 
+    class="detail-scroll" 
+    style="padding-top: {{navTotalHeight}}px; padding-bottom: calc(120rpx + env(safe-area-inset-bottom));"
+  >
+    
+    <!-- 2. 图片轮播 -->
+    <view class="media-swiper-wrapper">
+      <swiper 
+        class="media-swiper" 
+        bindchange="onSwiperChange"
+        circular
+      >
+        <block wx:for="{{post.images}}" wx:key="*this">
+          <swiper-item>
+            <image 
+              src="{{item}}" 
+              mode="aspectFill" 
+              class="swiper-img" 
+              bindtap="onPreviewImage" 
+              data-src="{{item}}"
+            />
+          </swiper-item>
+        </block>
+      </swiper>
+      
+      <!-- 指示点 -->
+      <view class="swiper-indicator" wx:if="{{post.images.length > 1}}">
+        <view 
+          wx:for="{{post.images}}" 
+          wx:key="*this" 
+          class="dot {{index === swiperCurrent ? 'active' : ''}}"
+        ></view>
+      </view>
+    </view>
+
+    <!-- 3. 内容主体 -->
+    <view class="content-body">
+      <view class="post-title">{{post.title}}</view>
+      
+      <text class="post-text" user-select>{{post.content}}</text>
+      
+      <view class="post-tags">
+        <text class="tag-item">#北中医</text>
+        <text class="tag-item">#秋天</text>
+      </view>
+
+      <view class="post-meta-row">
+        <text class="meta-date">{{post.createTime}} · {{post.location}}</text>
+      </view>
+
+      <view class="divider-line"></view>
+    </view>
+
+    <!-- 4. 评论区 -->
+    <view class="comments-section">
+      <view class="comments-header">共 {{post.stats.comments}} 条评论</view>
+      
+      <view class="comment-list" wx:if="{{comments.length > 0}}">
+        <view class="comment-item" wx:for="{{comments}}" wx:key="id">
+          <image class="c-avatar" src="{{item.avatar || '/images/default-avatar.png'}}"></image>
+          <view class="c-content">
+            <view class="c-name">{{item.nickname}}</view>
+            <view class="c-text">
+              {{item.content}} 
+              <text class="c-time">{{item.time}}</text>
+            </view>
+          </view>
+          <view class="c-like">
+            <view class="icon-heart-outline">♡</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 空评论占位 -->
+      <view class="empty-comments" wx:else>
+        <text>还没有评论，快来抢沙发~</text>
+      </view>
+    </view>
+
+  </scroll-view>
+
+  <!-- 5. 底部固定操作栏 -->
+  <view class="footer-bar">
+    <view class="input-wrapper" bindtap="onFocusComment">
+      <view class="icon-edit">✎</view>
+      <text class="placeholder-text">说点什么...</text>
+    </view>
+
+    <view class="action-group">
+      <view class="action-item" bindtap="toggleLike">
+        <view class="icon-heart {{post.stats.isLiked ? 'active' : ''}}">
+          {{post.stats.isLiked ? '♥' : '♡'}}
+        </view>
+        <text class="action-count">{{post.stats.likes || '点赞'}}</text>
+      </view>
+
+      <view class="action-item" bindtap="toggleStar">
+        <view class="icon-star {{post.stats.isStarred ? 'active' : ''}}">
+          {{post.stats.isStarred ? '★' : '☆'}}
+        </view>
+        <text class="action-count">{{post.stats.stars || '收藏'}}</text>
+      </view>
+
+      <view class="action-item">
+        <view class="icon-comment">💬</view>
+        <text class="action-count">{{post.stats.comments || '评论'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评论输入弹窗 -->
+  <view class="comment-popup-mask" wx:if="{{focusInput}}" bindtap="closeInput" catchtouchmove="true"></view>
+  <view class="comment-input-panel" wx:if="{{focusInput}}" style="bottom: {{focusInput ? 0 : '-100%'}}">
+    <textarea 
+      class="real-input" 
+      placeholder="友善评论，温暖人心" 
+      focus="{{focusInput}}" 
+      cursor-spacing="20"
+      bindinput="onInputChange"
+      value="{{inputValue}}"
+      show-confirm-bar="{{false}}"
+      adjust-position="{{true}}" 
+    ></textarea>
+    <view class="send-btn" bindtap="onSendComment">发送</view>
+  </view>
+
+</view>

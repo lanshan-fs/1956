@@ -1,83 +1,129 @@
-/* Neobrutalism Card Style */
+/* Neobrutalism Card Style (Updated) */
 .neo-card {
   width: 100%;
   background: #ffffff;
-  border: var(--border-width) solid var(--border-color);
-  border-radius: 8rpx;
-  box-shadow: var(--neo-shadow);
+  border: 2rpx solid #1A1A1A;
+  border-radius: 16rpx;
+  /* 硬朗阴影，制造悬浮感 */
+  box-shadow: 6rpx 6rpx 0 0 #1A1A1A;
   overflow: hidden;
-  margin-bottom: 12rpx; /* 统一设为 12rpx 对称间距 */
-  transition: all 0.1s ease;
+  margin-bottom: 24rpx; /* 卡片间距 */
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
   position: relative;
+  /* 避免文字溢出 */
+  word-break: break-all;
 }
 
-/* 点击时的反馈效果 */
+/* 交互反馈：按下时阴影消失，卡片位移 */
 .neo-card:active {
-  transform: translate(2rpx, 2rpx);
-  box-shadow: var(--neo-shadow-active);
+  transform: translate(4rpx, 4rpx);
+  box-shadow: 2rpx 2rpx 0 0 #1A1A1A;
+}
+
+/* 图片容器：增加背景色，处理长宽比异常 */
+.card-image-wrapper {
+  width: 100%;
+  background-color: #FAFAFA;
+  border-bottom: 2rpx solid #1A1A1A;
+  overflow: hidden;
+  min-height: 200rpx; /* 最小高度 */
+  position: relative;
 }
 
 .card-image {
   width: 100%;
-  border-bottom: var(--border-width) solid var(--border-color);
   display: block; /* 消除图片底部空隙 */
-  background-color: #f0f0f0; /* 加载前的占位色 */
-  max-height: 480rpx;
-  min-height: 240rpx;
 }
 
+/* 内容区 */
 .card-content {
-  padding: 16rpx;
+  padding: 20rpx;
+  background-color: #fff;
 }
 
+/* 标题：加粗，更紧凑 */
 .card-title {
   font-size: 28rpx;
-  font-weight: 700;
+  font-weight: 800; /* Extra Bold */
+  color: #1A1A1A;
   line-height: 1.4;
-  margin-bottom: 16rpx;
-  color: var(--text-main);
+  margin-bottom: 24rpx;
+  letter-spacing: 0.5rpx;
 }
 
+/* 底部栏：用户信息 + 点赞 */
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 22rpx;
 }
 
+/* 用户信息 */
 .user-info {
   display: flex;
   align-items: center;
-  flex: 1;
+  flex: 1; /* 占据剩余空间 */
+  overflow: hidden; /* 防止溢出 */
 }
 
 .avatar {
-  width: 36rpx;
-  height: 36rpx;
-  border: 2rpx solid var(--border-color);
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #1A1A1A;
   border-radius: 50%;
-  margin-right: 8rpx;
-  background-color: var(--accent); /* 默认头像底色 */
+  margin-right: 12rpx;
+  background-color: #eee;
+  flex-shrink: 0;
 }
 
 .username {
+  font-size: 22rpx;
   color: #666;
-  max-width: 120rpx;
+  font-weight: 600;
+  max-width: 160rpx;
 }
 
-.like-info {
+/* 点赞区域 */
+.like-wrapper {
   display: flex;
   align-items: center;
+  /* 增加点击热区 */
+  padding: 8rpx 0 8rpx 16rpx; 
 }
 
+/* 心形图标 - 使用 CSS 绘制或 Unicode */
 .heart-icon {
-  margin-right: 4rpx;
-  color: #ccc;
-  font-size: 24rpx;
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 8rpx;
+  position: relative;
+  /* 简单的 CSS 心形实现，或者用 emoji 替代 */
+  display: inline-block;
 }
 
-.heart-icon.liked {
-  color: var(--primary);
+.heart-icon::before {
+  content: '♡'; /* 空心心 */
+  font-size: 32rpx;
+  line-height: 24rpx;
+  color: #1A1A1A;
+  font-weight: 900;
+  position: absolute;
+  top: -4rpx;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.heart-icon.liked::before {
+  content: '♥'; /* 实心心 */
+  color: #FF4D4F; /* 小红书红 */
+  transform: scale(1.1);
+}
+
+.like-count {
+  font-size: 24rpx;
+  color: #1A1A1A;
+  font-weight: 700;
+  font-family: 'Arial', sans-serif;
 }
 
 /* 文本截断工具类 */
@@ -86,6 +132,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text-clamp-1 {
@@ -93,4 +140,5 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
