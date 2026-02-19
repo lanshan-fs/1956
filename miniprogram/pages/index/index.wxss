@@ -1,11 +1,9 @@
 page {
   background-color: var(--background);
-  /* 定义一些局部变量方便微调 */
-  --tab-height: 88rpx;
 }
 
 .page-home {
-  padding-bottom: 180rpx; /* 底部 TabBar 留空 */
+  padding-bottom: 180rpx;
 }
 
 /* === Block 1: Header === */
@@ -14,8 +12,11 @@ page {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* 最高层级，保证始终可见 */
+  z-index: 1000;
   background-color: var(--background);
+  /* 增加标志性黑线 */
+  border-bottom: var(--border-width) solid var(--border-color);
+  box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.03); /* 极细微投影 */
 }
 
 .nav-content {
@@ -45,39 +46,38 @@ page {
   transform: translateX(-50%);
 }
 
-/* === Block 2: Tabs Section === */
+/* === Block 2: Tabs Section (精准合拢方案) === */
 .tabs-section {
-  position: sticky;
-  top: 64px; /* JS会动态修正内容区的padding，这里sticky的top需要根据实际header高度调整，或者直接用fixed的替代方案。为简单起见，利用sticky配合z-index */
-  z-index: 99; /* 稍微高一点，浮在内容上，但必须低于 Popup */
+  position: sticky; 
+  /* 吸附位置由 wxml 的 stickyTop 计算提供 */
+  z-index: 99; 
   background-color: var(--background);
-  height: var(--tab-height);
   display: flex;
   align-items: center;
+  /* 标签栏底部的细灰线 */
+  border-bottom: 2rpx solid #EAEAEA;
 }
 
 .tabs-scroll {
   flex: 1;
   height: 100%;
   white-space: nowrap;
-  mask-image: linear-gradient(to right, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
 }
 
 .tabs-container {
   display: flex;
   align-items: center;
-  padding: 0 24rpx;
+  padding: 0 12rpx;
   height: 100%;
 }
 
 .tab-item {
-  padding: 10rpx 30rpx;
-  font-size: 28rpx;
+  padding: 8rpx 20rpx;
+  font-size: 26rpx; /* 字体微调小 */
   color: #666;
   font-weight: bold;
   border-radius: 999rpx;
-  margin-right: 12rpx;
+  margin-right: 8rpx;
   border: 4rpx solid transparent;
   transition: all 0.2s;
 }
@@ -90,37 +90,35 @@ page {
   transform: translate(-2rpx, -2rpx);
 }
 
-/* 下拉按钮 */
 .tabs-more-btn {
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
-  width: 88rpx;
+  width: 70rpx;
   background-color: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: -10rpx 0 20rpx -10rpx rgba(0,0,0,0.1);
-  z-index: 102; /* 按钮本身要在最上层，方便点击收起 */
+  z-index: 102;
 }
 
 .icon-chevron {
-  width: 16rpx;
-  height: 16rpx;
-  border-right: 4rpx solid #1A1A1A;
-  border-bottom: 4rpx solid #1A1A1A;
+  width: 14rpx;
+  height: 14rpx;
+  border-right: 3.5rpx solid #1A1A1A;
+  border-bottom: 3.5rpx solid #1A1A1A;
   transform: rotate(45deg);
-  margin-top: -6rpx;
+  margin-top: -4rpx;
   transition: transform 0.3s;
 }
 
 .tabs-more-btn.open .icon-chevron {
   transform: rotate(-135deg);
-  margin-top: 6rpx;
+  margin-top: 4rpx;
 }
 
-/* === 频道下拉面板 === */
+/* === 频道下拉面板 (网格修复) === */
 .channel-popup-mask {
   position: fixed;
   top: 0;
@@ -128,7 +126,7 @@ page {
   right: 0;
   bottom: 0;
   background: rgba(0,0,0,0.5);
-  z-index: 200; /* 【关键修改】高于 tabs-section (99)，低于 custom-nav (1000) */
+  z-index: 200; 
   display: none;
   opacity: 0;
   transition: opacity 0.2s;
@@ -144,72 +142,73 @@ page {
   left: 0;
   right: 0;
   background: var(--background);
-  padding: 24rpx;
-  border-bottom: 4rpx solid #000;
-  border-radius: 0 0 32rpx 32rpx;
-  /* top 值由 wxml 行内样式动态控制，紧贴 header */
+  padding: 30rpx 24rpx 50rpx;
+  border-bottom: var(--border-width) solid var(--border-color);
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: 0 20rpx 40rpx rgba(0,0,0,0.1);
 }
 
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24rpx;
-  font-size: 28rpx;
-  font-weight: bold;
+.p-main-title {
+  font-size: 32rpx;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-right: 16rpx;
+}
+
+.p-sub-title {
+  font-size: 22rpx;
   color: #999;
+  font-weight: 500;
 }
 
-/* 关闭叉号 */
-.icon-close {
-  width: 30rpx;
-  height: 30rpx;
-  position: relative;
-}
-.icon-close::before, .icon-close::after {
-  content: ''; position: absolute;
-  top: 50%; left: 50%;
-  width: 100%; height: 4rpx;
-  background: #000;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-.icon-close::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
+.popup-edit-btn {
+  font-size: 24rpx;
+  color: var(--primary);
+  font-weight: 900;
+  padding: 8rpx 24rpx;
+  border: 2rpx solid var(--primary);
+  border-radius: 999rpx;
 }
 
 .popup-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20rpx;
 }
 
 .popup-item {
-  width: 30%;
+  width: 100%;
   text-align: center;
-  padding: 16rpx 0;
+  padding: 20rpx 0;
   background: #fff;
-  border: 4rpx solid #eee;
+  border: var(--border-width) solid #eee;
   border-radius: 12rpx;
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333;
+  transition: all 0.2s;
+  box-sizing: border-box;
 }
 
 .popup-item.active {
-  background: #FFD93D;
-  border-color: #000;
-  color: #000;
-  box-shadow: 4rpx 4rpx 0 0 #000;
+  background: var(--accent);
+  border-color: var(--border-color);
+  color: var(--text-main);
+  box-shadow: 4rpx 4rpx 0 0 var(--border-color);
+  transform: translate(-2rpx, -2rpx);
 }
 
-/* === Block 3: Waterfall === */
+.p-item-text {
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+/* === Block 3: Waterfall (还原对称间距) === */
 .waterfall-container {
   display: flex;
   justify-content: space-between;
-  padding: 24rpx 12rpx;
+  padding: 12rpx; /* 对称 12rpx */
   align-items: flex-start;
+  background-color: var(--background);
 }
 
 .column {
-  width: 48%;
+  width: calc(50% - 6rpx); 
 }

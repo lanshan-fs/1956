@@ -1,1 +1,215 @@
-/* pages/profile/profile.wxss */
+/* miniprogram/pages/profile/profile.wxss */
+.container {
+  padding: 30rpx;
+  padding-bottom: 180rpx; /* 留出底部 TabBar 的位置 */
+  background-color: var(--background);
+}
+
+/* 个人信息卡片 */
+.profile-header {
+  background: #FFFFFF;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--neo-shadow);
+  padding: 40rpx 30rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.avatar-wrapper {
+  width: 140rpx;
+  height: 140rpx;
+  border: var(--border-width) solid var(--border-color);
+  background: var(--accent); /* 连翘黄 */
+  overflow: hidden;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 8rpx;
+}
+
+.user-id {
+  font-size: 24rpx;
+  color: #666;
+  font-family: monospace;
+}
+
+.settings-btn {
+  width: 70rpx;
+  height: 70rpx;
+  border: var(--border-width) solid var(--border-color);
+  background: #FFFFFF;
+  box-shadow: 4rpx 4rpx 0px var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  transition: all 0.1s;
+}
+
+.settings-btn:active {
+  box-shadow: none;
+  transform: translate(4rpx, 4rpx);
+}
+
+.bio {
+  font-size: 26rpx;
+  line-height: 1.6;
+  padding: 24rpx;
+  background: var(--background);
+  border: 2rpx dashed var(--border-color);
+  margin-bottom: 30rpx;
+  color: #444;
+}
+
+/* 数据统计 */
+.stats-bar {
+  display: flex;
+  justify-content: space-around;
+  border-top: var(--border-width) solid var(--border-color);
+  padding-top: 30rpx;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-num {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 900;
+  color: var(--text-main);
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #666;
+  margin-top: 4rpx;
+}
+
+/* 校园认证入口 */
+.cert-banner {
+  background: var(--secondary); /* 艾草绿 */
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--neo-shadow);
+  padding: 24rpx 30rpx;
+  margin-bottom: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.1s;
+}
+
+.cert-banner:active {
+  box-shadow: none;
+  transform: translate(6rpx, 6rpx);
+}
+
+.cert-info .title {
+  display: block;
+  font-weight: 900;
+  font-size: 32rpx;
+  color: var(--text-main);
+}
+
+.cert-info .desc {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.cert-tag {
+  background: var(--border-color);
+  color: #FFFFFF;
+  padding: 10rpx 24rpx;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+/* 内容选项卡 */
+.content-tabs {
+  display: flex;
+  margin-bottom: 40rpx;
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  color: var(--text-main);
+  background: var(--accent);
+  border: var(--border-width) solid var(--border-color);
+  border-bottom: none;
+  margin-bottom: calc(-1 * var(--border-width));
+}
+
+/* 内容区域占位 */
+.content-area {
+  min-height: 400rpx;
+}
+
+.empty-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+}
+
+.empty-icon {
+  width: 100rpx;
+  height: 100rpx;
+  opacity: 0.2;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 底部辅助链接 */
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80rpx 0;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.nav-item {
+  padding: 10rpx 20rpx;
+}
+
+.divider {
+  color: #ddd;
+}

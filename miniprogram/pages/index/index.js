@@ -19,8 +19,17 @@ Page({
   onLoad() {
     // 获取系统状态栏高度，适配刘海屏
     const systemInfo = wx.getSystemInfoSync();
+    const navBarHeight = 44; // 胶囊高度
+    const tabHeight = 44;    // 标签栏高度固定为 44px
+    const navHeaderHeight = systemInfo.statusBarHeight + navBarHeight;
+    
     this.setData({
-      statusBarHeight: systemInfo.statusBarHeight
+      statusBarHeight: systemInfo.statusBarHeight,
+      navBarHeight: navBarHeight,
+      tabHeight: tabHeight,
+      navHeaderHeight: navHeaderHeight,
+      // 吸附位置 = 导航栏总高度 - 标签栏高度
+      stickyTop: navHeaderHeight - tabHeight
     });
     this.initWaterfall();
   },

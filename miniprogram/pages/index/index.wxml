@@ -9,15 +9,20 @@
       <view class="nav-right"></view> </view>
   </view>
 
-  <view class="scroll-content" style="padding-top: {{statusBarHeight + navBarHeight}}px;">
+  <!-- 内容区 PaddingTop 只需要导航栏高度 -->
+  <view class="scroll-content" style="padding-top: {{navHeaderHeight}}px;">
     
-    <view class="tabs-section">
+    <!-- 标签栏 -->
+    <view class="tabs-section" style="top: {{stickyTop}}px; height: {{tabHeight}}px;">
       <scroll-view 
         scroll-x 
         class="tabs-scroll" 
         enable-flex 
         scroll-into-view="tab-{{currentTab > 2 ? currentTab - 2 : 0}}"
         show-scrollbar="{{false}}"
+        scroll-with-animation
+        enhanced
+        fast-deceleration
       >
         <view class="tabs-container">
           <view 
@@ -39,17 +44,19 @@
       </view>
     </view>
 
+    <!-- 频道弹窗 -->
     <view class="channel-popup-mask {{showChannelPopup ? 'show' : ''}}" bindtap="toggleChannelPopup" catchtouchmove="true">
       <view 
         class="channel-popup-body" 
         catchtap="stopProp"
-        style="top: {{statusBarHeight + navBarHeight}}px;"
+        style="top: {{navHeaderHeight}}px;"
       >
         <view class="popup-header">
-          <text>我的频道</text>
-          <view class="popup-close" bindtap="toggleChannelPopup">
-            <view class="icon-close"></view>
+          <view class="popup-title-group">
+            <text class="p-main-title">我的频道</text>
+            <text class="p-sub-title">点击进入频道</text>
           </view>
+          <view class="popup-edit-btn" catchtap="onEditChannels">编辑</view>
         </view>
         <view class="popup-grid">
           <view 
@@ -59,12 +66,13 @@
             bindtap="switchTab"
             data-index="{{index}}"
           >
-            {{item.name}}
+            <text class="p-item-text">{{item.name}}</text>
           </view>
         </view>
       </view>
     </view>
 
+    <!-- 瀑布流：还原对称布局 -->
     <view class="waterfall-container">
       <view class="column">
         <block wx:for="{{leftList}}" wx:key="id">

@@ -3,10 +3,10 @@
   width: 100%;
   background: #ffffff;
   border: var(--border-width) solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: 8rpx;
   box-shadow: var(--neo-shadow);
   overflow: hidden;
-  margin-bottom: 24rpx;
+  margin-bottom: 12rpx; /* 统一设为 12rpx 对称间距 */
   transition: all 0.1s ease;
   position: relative;
 }
@@ -22,6 +22,8 @@
   border-bottom: var(--border-width) solid var(--border-color);
   display: block; /* 消除图片底部空隙 */
   background-color: #f0f0f0; /* 加载前的占位色 */
+  max-height: 480rpx;
+  min-height: 240rpx;
 }
 
 .card-content {

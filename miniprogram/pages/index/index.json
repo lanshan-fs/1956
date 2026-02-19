@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "1956",
   "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
   "usingComponents": {
     "neo-card": "/components/neo-card/neo-card"
   }

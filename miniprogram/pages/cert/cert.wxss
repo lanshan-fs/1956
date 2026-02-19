@@ -1,0 +1,147 @@
+/* miniprogram/pages/cert/cert.wxss */
+.container {
+  padding: 40rpx;
+  background-image: radial-gradient(var(--border-color) 1rpx, transparent 0);
+  background-size: 40rpx 40rpx; /* 点状底纹，增加视觉深度 */
+}
+
+/* 步骤条 */
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60rpx;
+}
+
+.step-item {
+  font-size: 24rpx;
+  font-weight: 800;
+  padding: 10rpx 20rpx;
+  border: var(--border-width) solid var(--border-color);
+  background: #fff;
+}
+
+.step-item.active {
+  background: var(--accent);
+  box-shadow: 4rpx 4rpx 0px var(--border-color);
+}
+
+.step-line {
+  width: 40rpx;
+  height: var(--border-width);
+  background: var(--border-color);
+}
+
+/* 学生证卡片 */
+.student-card {
+  background: #fff;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 12rpx 12rpx 0px var(--border-color);
+  overflow: hidden;
+  margin-bottom: 60rpx;
+}
+
+.card-header {
+  background: var(--primary);
+  padding: 30rpx;
+  border-bottom: var(--border-width) solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-text {
+  font-weight: 900;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.card-title {
+  background: #fff;
+  color: var(--border-color);
+  font-size: 20rpx;
+  font-weight: 800;
+  padding: 4rpx 12rpx;
+  border: 3rpx solid var(--border-color);
+}
+
+.card-body {
+  padding: 40rpx 30rpx;
+}
+
+.input-group {
+  margin-bottom: 30rpx;
+}
+
+.label {
+  display: block;
+  font-size: 24rpx;
+  font-weight: 800;
+  margin-bottom: 12rpx;
+  color: var(--text-main);
+}
+
+.neo-input {
+  height: 90rpx;
+  border: var(--border-width) solid var(--border-color);
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  background: #fff;
+}
+
+.ph-style {
+  color: #ccc;
+}
+
+.card-footer {
+  background: #f9f9f9;
+  padding: 20rpx 30rpx;
+  border-top: 1rpx dashed var(--border-color);
+}
+
+.footer-tip {
+  font-size: 20rpx;
+  color: #999;
+}
+
+/* 须知框 */
+.notice-box {
+  background: #fff;
+  border: var(--border-width) solid var(--border-color);
+  padding: 30rpx;
+  margin-bottom: 60rpx;
+}
+
+.notice-title {
+  font-weight: 900;
+  font-size: 28rpx;
+  margin-bottom: 16rpx;
+  color: var(--primary);
+}
+
+.notice-content {
+  font-size: 24rpx;
+  line-height: 1.8;
+  color: #666;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  background: var(--accent);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 8rpx 8rpx 0px var(--border-color);
+  font-weight: 900;
+  font-size: 32rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.submit-btn:active {
+  box-shadow: none;
+  transform: translate(4rpx, 4rpx);
+}

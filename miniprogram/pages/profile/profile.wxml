@@ -1,2 +1,67 @@
-<!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<!-- miniprogram/pages/profile/profile.wxml -->
+<view class="container">
+  <!-- 个人信息卡片 -->
+  <view class="profile-header">
+    <view class="header-main">
+      <view class="avatar-wrapper">
+        <image class="avatar" src="../../images/tab_profile_active.png" mode="aspectFill"></image>
+      </view>
+      <view class="user-info">
+        <view class="nickname">北中医小郎中</view>
+        <view class="user-id">ID: 1956001</view>
+      </view>
+      <view class="settings-btn" bindtap="onTapSettings">⚙️</view>
+    </view>
+    
+    <view class="bio">一名热爱针灸的 1956 级学子。🌿
+志向：传承神农遗风，弘扬大医精诚。</view>
+    
+    <view class="stats-bar">
+      <view class="stat-item">
+        <text class="stat-num">156</text>
+        <text class="stat-label">关注</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">2.4k</text>
+        <text class="stat-label">粉丝</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">8.9k</text>
+        <text class="stat-label">获赞</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 校园认证入口 -->
+  <view class="cert-banner" bindtap="onTapCert">
+    <view class="cert-info">
+      <text class="title">校园认证</text>
+      <text class="desc">北中医在校生专属标识</text>
+    </view>
+    <view class="cert-tag">去认证 ></view>
+  </view>
+
+  <!-- 内容选项卡 -->
+  <view class="content-tabs">
+    <view class="tab {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">动态</view>
+    <view class="tab {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">收藏</view>
+    <view class="tab {{activeTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">赞过</view>
+  </view>
+
+  <!-- 内容展示区域 -->
+  <view class="content-area">
+    <view class="empty-placeholder">
+      <image class="empty-icon" src="../../images/tab_add.png" mode="aspectFit"></image>
+      <view class="empty-text">暂无数据</view>
+    </view>
+  </view>
+
+  <!-- 底部辅助链接 -->
+  <view class="footer-nav">
+    <text class="nav-item" bindtap="onTapContact">联系我们</text>
+    <text class="divider">|</text>
+    <text class="nav-item" bindtap="onTapEdit">编辑资料</text>
+    <text class="divider">|</text>
+    <text class="nav-item">常见问题</text>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+<!-- miniprogram/pages/settings/settings.wxml -->
+<view class="container">
+  <!-- 账号设置 -->
+  <view class="section-title">账号与安全</view>
+  <view class="settings-group">
+    <view class="setting-item" bindtap="navigateTo" data-url="/pages/profile-edit/profile-edit">
+      <text class="item-label">编辑个人资料</text>
+      <text class="item-arrow">></text>
+    </view>
+    <view class="setting-item" bindtap="navigateTo" data-url="/pages/cert/cert">
+      <text class="item-label">校园认证状态</text>
+      <view class="item-status">已认证</view>
+    </view>
+  </view>
+
+  <!-- 通用设置 -->
+  <view class="section-title">通用</view>
+  <view class="settings-group">
+    <view class="setting-item">
+      <text class="item-label">新消息通知</text>
+      <switch color="var(--primary)" checked />
+    </view>
+    <view class="setting-item" bindtap="onClearCache">
+      <text class="item-label">清理缓存</text>
+      <text class="item-value">24.5 MB</text>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="section-title">关于 1956</view>
+  <view class="settings-group">
+    <view class="setting-item" bindtap="onTapAbout">
+      <text class="item-label">关于我们</text>
+      <text class="item-arrow">></text>
+    </view>
+    <view class="setting-item">
+      <text class="item-label">用户协议与隐私政策</text>
+      <text class="item-arrow">></text>
+    </view>
+    <view class="setting-item">
+      <text class="item-label">当前版本</text>
+      <text class="item-value">v1.0.4 Beta</text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-wrapper">
+    <button class="logout-btn" bindtap="onLogout">退出登录</button>
+  </view>
+</view>

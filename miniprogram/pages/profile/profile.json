@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "neo-card": "../../components/neo-card/neo-card"
+  },
+  "navigationBarTitleText": "我的",
+  "navigationBarBackgroundColor": "#FFFDF5",
+  "navigationBarTextStyle": "black"
 }

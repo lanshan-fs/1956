@@ -4,7 +4,10 @@
     "pages/market/market",
     "pages/post/post",
     "pages/notice/notice",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/cert/cert",
+    "pages/settings/settings",
+    "pages/profile-edit/profile-edit"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -37,7 +37,7 @@ page {
 /* 通用容器 */
 .container {
   min-height: 100vh;
-  padding: 0 24rpx;
+  padding: 0 2rpx;
   box-sizing: border-box;
 }
 

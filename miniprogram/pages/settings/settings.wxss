@@ -1,0 +1,90 @@
+/* miniprogram/pages/settings/settings.wxss */
+.container {
+  padding: 30rpx;
+  background-color: var(--background);
+}
+
+.section-title {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #888;
+  margin-bottom: 20rpx;
+  margin-left: 10rpx;
+}
+
+.settings-group {
+  margin-bottom: 50rpx;
+}
+
+.setting-item {
+  background: #FFFFFF;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 4rpx 4rpx 0px var(--border-color);
+  padding: 30rpx 40rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.1s;
+}
+
+.setting-item:active {
+  box-shadow: none;
+  transform: translate(4rpx, 4rpx);
+}
+
+.item-label {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.item-arrow {
+  font-size: 24rpx;
+  color: #CCC;
+  font-weight: 900;
+}
+
+.item-status {
+  background: var(--secondary); /* 艾草绿 */
+  color: var(--text-main);
+  font-size: 20rpx;
+  font-weight: 800;
+  padding: 4rpx 16rpx;
+  border: 2rpx solid var(--border-color);
+}
+
+.item-value {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 退出按钮 */
+.logout-wrapper {
+  margin-top: 100rpx;
+  padding-bottom: 60rpx;
+}
+
+.logout-btn {
+  background: var(--primary); /* 朱砂红 */
+  color: #FFFFFF;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 8rpx 8rpx 0px var(--border-color);
+  font-weight: 900;
+  font-size: 32rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.logout-btn:active {
+  box-shadow: none;
+  transform: translate(4rpx, 4rpx);
+}
+
+/* Switch 缩放微调 */
+switch {
+  transform: scale(0.8);
+}

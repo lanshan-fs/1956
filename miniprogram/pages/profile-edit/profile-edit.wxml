@@ -1,0 +1,43 @@
+<!-- miniprogram/pages/profile-edit/profile-edit.wxml -->
+<view class="container">
+  <!-- 头像编辑区 -->
+  <view class="avatar-section">
+    <view class="avatar-box" bindtap="onChooseAvatar">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <view class="avatar-edit-tag">更换头像</view>
+    </view>
+  </view>
+
+  <!-- 表单项 -->
+  <view class="form-group">
+    <view class="form-item">
+      <text class="label">昵称</text>
+      <input class="neo-input" type="nickname" value="{{userInfo.nickname}}" placeholder="请输入昵称" bindinput="onNicknameInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">性别</text>
+      <picker mode="selector" range="{{genders}}" bindchange="onGenderChange">
+        <view class="neo-input">{{userInfo.gender || '请选择性别'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">所属校区</text>
+      <picker mode="selector" range="{{campuses}}" bindchange="onCampusChange">
+        <view class="neo-input">{{userInfo.campus || '请选择所属校区'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">个人简介</text>
+      <textarea class="neo-textarea" value="{{userInfo.bio}}" placeholder="写点什么介绍下自己吧..." maxlength="100" bindinput="onBioInput" />
+      <view class="char-count">{{userInfo.bio.length || 0}}/100</view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="btn-area">
+    <button class="save-btn" bindtap="onSave">保存修改</button>
+  </view>
+</view>
