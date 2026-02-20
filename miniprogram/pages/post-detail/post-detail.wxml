@@ -1,4 +1,4 @@
-<view class="container page-detail">
+<view class="container page-detail {{type}}">
   <!-- 1. 自定义导航栏 -->
   <view class="detail-nav" style="height: {{navTotalHeight}}px;">
     <!-- 导航内容区：垂直定位到胶囊位置 -->
@@ -8,12 +8,20 @@
         <view class="icon-back"></view>
       </view>
       
-      <view class="nav-center user-mini-profile">
+      <view class="nav-center user-mini-profile" wx:if="{{type === 'post'}}">
         <image class="mini-avatar" src="{{post.userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
         <text class="mini-name">{{post.userInfo.nickname}}</text>
         <view class="mini-follow-btn {{post.userInfo.isFollowed ? 'followed' : ''}}" catchtap="toggleFollow" wx:if="{{!post.userInfo.isFollowed}}">
           关注
         </view>
+      </view>
+
+      <!-- 集市模式导航栏：增加搜索入口 -->
+      <view class="nav-center market-nav-title" wx:else>
+        <view class="search-icon-btn" bindtap="onSearch">
+          <icon type="search" size="18" color="#1A1A1A"/>
+        </view>
+        <text class="nav-title-text">闲置详情</text>
       </view>
       
       <!-- 右侧空出位置给胶囊 -->
@@ -26,10 +34,10 @@
   <scroll-view 
     scroll-y 
     class="detail-scroll" 
-    style="padding-top: {{navTotalHeight}}px; padding-bottom: calc(120rpx + env(safe-area-inset-bottom));"
+    style="padding-top: {{navTotalHeight}}px; padding-bottom: calc(140rpx + env(safe-area-inset-bottom));"
   >
     
-    <!-- 2. 图片轮播 -->
+    <!-- 2. 图片轮播 (小红书式) -->
     <view class="media-swiper-wrapper">
       <swiper 
         class="media-swiper" 
@@ -61,25 +69,47 @@
 
     <!-- 3. 内容主体 -->
     <view class="content-body">
+      
+      <!-- 集市专属：卖家信息 & 价格 -->
+      <block wx:if="{{type === 'market'}}">
+        <view class="market-seller-row" bindtap="onSellerHome">
+          <image class="seller-avatar" src="{{post.userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+          <view class="seller-info">
+            <view class="seller-name">{{post.userInfo.nickname}}</view>
+            <view class="seller-last-seen">{{post.userInfo.lastSeen}}</view>
+          </view>
+          <view class="seller-arrow">〉</view>
+        </view>
+        
+        <view class="market-price-row">
+          <text class="price-label">理想价</text>
+          <text class="currency">¥</text>
+          <text class="price-value">{{post.price}}</text>
+        </view>
+      </block>
+
       <view class="post-title">{{post.title}}</view>
       
       <text class="post-text" user-select>{{post.content}}</text>
       
-      <view class="post-tags">
+      <view class="post-tags" wx:if="{{type === 'post'}}">
         <text class="tag-item">#北中医</text>
         <text class="tag-item">#秋天</text>
       </view>
 
       <view class="post-meta-row">
         <text class="meta-date">{{post.createTime}} · {{post.location}}</text>
+        <text class="meta-views" wx:if="{{type === 'market'}}">{{post.stats.views}}人浏览</text>
       </view>
 
       <view class="divider-line"></view>
     </view>
 
-    <!-- 4. 评论区 -->
+    <!-- 4. 评论/留言区 -->
     <view class="comments-section">
-      <view class="comments-header">共 {{post.stats.comments}} 条评论</view>
+      <view class="comments-header">
+        {{type === 'market' ? '留言' : '评论'}} · {{post.stats.comments}}
+      </view>
       
       <view class="comment-list" wx:if="{{comments.length > 0}}">
         <view class="comment-item" wx:for="{{comments}}" wx:key="id">
@@ -88,18 +118,17 @@
             <view class="c-name">{{item.nickname}}</view>
             <view class="c-text">
               {{item.content}} 
-              <text class="c-time">{{item.time}}</text>
+              <view class="c-time">{{item.time}}</view>
             </view>
           </view>
-          <view class="c-like">
+          <view class="c-like" wx:if="{{type === 'post'}}">
             <view class="icon-heart-outline">♡</view>
           </view>
         </view>
       </view>
 
-      <!-- 空评论占位 -->
       <view class="empty-comments" wx:else>
-        <text>还没有评论，快来抢沙发~</text>
+        <text>还没有{{type === 'market' ? '留言' : '评论'}}哦~</text>
       </view>
     </view>
 
@@ -107,13 +136,15 @@
 
   <!-- 5. 底部固定操作栏 -->
   <view class="footer-bar">
+    <!-- 发布留言/评论输入框 -->
     <view class="input-wrapper" bindtap="onFocusComment">
       <view class="icon-edit">✎</view>
-      <text class="placeholder-text">说点什么...</text>
+      <text class="placeholder-text">{{type === 'market' ? '问问卖家更多细节...' : '说点什么...'}}</text>
     </view>
 
     <view class="action-group">
-      <view class="action-item" bindtap="toggleLike">
+      <!-- 只有动态详情显示点赞 -->
+      <view class="action-item" bindtap="toggleLike" wx:if="{{type === 'post'}}">
         <view class="icon-heart {{post.stats.isLiked ? 'active' : ''}}">
           {{post.stats.isLiked ? '♥' : '♡'}}
         </view>
@@ -127,9 +158,15 @@
         <text class="action-count">{{post.stats.stars || '收藏'}}</text>
       </view>
 
-      <view class="action-item">
+      <!-- 动态详情显示评论图标 -->
+      <view class="action-item" wx:if="{{type === 'post'}}">
         <view class="icon-comment">💬</view>
         <text class="action-count">{{post.stats.comments || '评论'}}</text>
+      </view>
+
+      <!-- 集市详情显示“联系对方”按钮 (Neobrutalism Button) -->
+      <view class="contact-btn" wx:if="{{type === 'market'}}" bindtap="onContact">
+        联系对方
       </view>
     </view>
   </view>
@@ -139,7 +176,7 @@
   <view class="comment-input-panel" wx:if="{{focusInput}}" style="bottom: {{focusInput ? 0 : '-100%'}}">
     <textarea 
       class="real-input" 
-      placeholder="友善评论，温暖人心" 
+      placeholder="{{type === 'market' ? '在此给卖家留言' : '友善评论，重在中医'}}" 
       focus="{{focusInput}}" 
       cursor-spacing="20"
       bindinput="onInputChange"

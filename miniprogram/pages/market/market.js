@@ -1,66 +1,143 @@
 // pages/market/market.js
+const app = getApp();
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    // Navigation Bar Layout Data
+    navBarHeight: 0,
+    menuButtonTop: 0,
+    menuButtonHeight: 0,
+    menuButtonRight: 0, // Distance from right edge
+    
+    campuses: ['良乡', '和平街', '望京'],
+    campusIndex: 0,
+    categories: ['全部', '教材教辅', '数码电子', '生活用品', '美妆护肤', '票务', '其他'],
+    activeCategory: 0,
+    
+    leftList: [],
+    rightList: [],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
-
+    this.initNavigationLayout();
+    this.generateMockData();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  initNavigationLayout() {
+    const sysInfo = wx.getSystemInfoSync();
+    const menuButton = wx.getMenuButtonBoundingClientRect();
+    
+    // Calculate Navigation Bar Height
+    // Typically: MenuButton Bottom + MenuButton Top - StatusBarHeight (Wait, simple way is MenuButton Bottom + Padding)
+    // Reliable way: (MenuButton Top - StatusBar Height) * 2 + MenuButton Height + StatusBar Height
+    // But usually we just want the content to align with the menu button.
+    
+    // Let's set the navBarHeight to cover everything down to the bottom of the capsule + padding
+    const navBarHeight = menuButton.bottom + 8; // 8px padding bottom
+    const navContentRightPadding = sysInfo.windowWidth - menuButton.left;
+    
+    this.setData({
+      navBarHeight: navBarHeight,
+      menuButtonTop: menuButton.top,
+      menuButtonHeight: menuButton.height,
+      navContentRightPadding: navContentRightPadding,
+      tabsHeight: 56 // Approx 112rpx
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
+  generateMockData() {
+    const mockImages = [
+      'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400', 
+      'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=400', 
+      'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400', 
+      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400', 
+      'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=400', 
+    ];
 
+    const conditions = ['全新', '99新', '95新', '9成新', '8成新'];
+
+    const newItems = Array.from({ length: 10 }).map((_, i) => ({
+      id: Date.now() + i,
+      title: this.getRandomTitle(i),
+      cover: mockImages[i % mockImages.length],
+      avatar: '', 
+      nickname: `同学${Math.floor(Math.random() * 100)}`,
+      likes: Math.floor(Math.random() * 50),
+      wants: Math.floor(Math.random() * 20),
+      price: Math.floor(Math.random() * 200) + 10,
+      campus: this.data.campuses[Math.floor(Math.random() * 3)],
+      condition: conditions[Math.floor(Math.random() * conditions.length)]
+    }));
+
+    this.distributeItems(newItems);
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  getRandomTitle(index) {
+    const titles = [
+      '出闲置，九成新，良乡自取',
+      '考研结束出资料，包含真题和笔记',
+      'Ipad Air 5，带笔，无磕碰',
+      '宿舍神器，懒人支架',
+      '未拆封的护肤品，低价出',
+      '中医内科学教材，重点已划',
+      '针灸铜人模型，平时练习用'
+    ];
+    return titles[index % titles.length];
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
+  distributeItems(items) {
+    let left = this.data.leftList;
+    let right = this.data.rightList;
 
+    items.forEach((item, index) => {
+      if (index % 2 === 0) {
+        left.push(item);
+      } else {
+        right.push(item);
+      }
+    });
+
+    this.setData({
+      leftList: left,
+      rightList: right
+    });
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  onCampusChange(e) {
+    this.setData({ campusIndex: e.detail.value });
+    this.resetData();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  onCategoryChange(e) {
+    // Event from neo-tabs
+    const index = e.detail.index;
+    this.setData({ activeCategory: index });
+    this.resetData();
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
+  resetData() {
+    this.setData({
+      leftList: [],
+      rightList: []
+    });
+    setTimeout(() => {
+        this.generateMockData();
+    }, 300);
+  },
 
+  onSearchTap() {
+    wx.navigateTo({ url: '/pages/search/search' });
+  },
+
+  onItemTap(e) {
+    // Event from neo-goods-card
+    const id = e.detail.id;
+    wx.navigateTo({
+      url: `/pages/post-detail/post-detail?id=${id}&type=market`,
+    });
+  },
+
+  onPostTap() {
+    wx.navigateTo({ url: '/pages/post/post?type=market' });
   }
-})
+});

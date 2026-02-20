@@ -1,0 +1,112 @@
+<!--pages/chat/chat.wxml-->
+<view class="container chat-page">
+  <!-- 1. 自定义导航栏 (与详情页一致) -->
+  <view class="chat-nav" style="height: {{navTotalHeight}}px;">
+    <view class="nav-content-wrapper" style="top: {{navContentTop}}px; height: {{navContentHeight}}px;">
+      <view class="nav-left" bindtap="onNavBack">
+        <view class="icon-back"></view>
+      </view>
+      
+      <view class="nav-center">
+        <text class="chat-nickname">{{userInfo.nickname}}</text>
+      </view>
+      
+      <!-- 功能菜单 (入口) -->
+      <view class="nav-right" bindtap="onMoreOptions">
+        <view class="icon-more">···</view>
+      </view>
+      
+      <!-- 右侧空出胶囊位置 -->
+      <view class="nav-right-placeholder" style="width: {{menuButtonWidth}}px;"></view>
+    </view>
+  </view>
+
+  <!-- 2. 聊天区 -->
+  <scroll-view 
+    scroll-y 
+    class="chat-scroll" 
+    scroll-into-view="{{lastMessageId}}" 
+    scroll-with-animation
+    style="padding-top: {{navTotalHeight}}px; padding-bottom: calc(120rpx + env(safe-area-inset-bottom));"
+  >
+    <view class="chat-content">
+      <block wx:for="{{messages}}" wx:key="id">
+        <!-- 时间线 -->
+        <view class="time-stamp" wx:if="{{item.showTime}}">{{item.time}}</view>
+
+        <!-- 消息气泡 (左/右) -->
+        <view class="message-row {{item.isMe ? 'row-me' : 'row-other'}}" id="msg-{{item.id}}">
+          <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+          
+          <view class="bubble-wrapper">
+            <view class="bubble {{item.type === 'image' ? 'bubble-image' : ''}}">
+              <text wx:if="{{item.type === 'text'}}" user-select>{{item.content}}</text>
+              <image 
+                wx:if="{{item.type === 'image'}}" 
+                src="{{item.content}}" 
+                mode="widthFix" 
+                class="msg-image"
+                bindtap="onPreviewImage"
+                data-src="{{item.content}}"
+              />
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <!-- 底部撑开 -->
+      <view id="bottom-pad" style="height: 40rpx;"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 3. 底部输入栏 (Neobrutalism) -->
+  <view class="input-bar" style="bottom: {{keyboardHeight}}px;">
+    <!-- 语音按钮 -->
+    <view class="icon-btn voice-btn">
+      <text>🎙️</text>
+    </view>
+
+    <!-- 输入框 -->
+    <view class="input-wrapper">
+      <input 
+        class="chat-input" 
+        placeholder="说点什么..." 
+        cursor-spacing="20"
+        confirm-type="send"
+        bindconfirm="onSend"
+        bindinput="onInput"
+        bindfocus="onFocus"
+        bindblur="onBlur"
+        value="{{inputValue}}"
+        adjust-position="{{false}}"
+      />
+    </view>
+
+    <!-- 表情按钮 -->
+    <view class="icon-btn emoji-btn">
+      <text>😊</text>
+    </view>
+
+    <!-- 更多按钮 (+) -->
+    <view class="icon-btn more-btn" bindtap="onToggleTools">
+      <text>+</text>
+    </view>
+  </view>
+
+  <!-- 更多功能面板 (底部弹窗/扩展栏) -->
+  <view class="tools-panel" wx:if="{{showTools}}" style="height: 300rpx;">
+    <view class="tool-item" bindtap="onChooseImage">
+      <view class="tool-icon">🖼️</view>
+      <text class="tool-text">相册</text>
+    </view>
+    <view class="tool-item" bindtap="onTakePhoto">
+      <view class="tool-icon">📷</view>
+      <text class="tool-text">拍摄</text>
+    </view>
+    <view class="tool-item" bindtap="onSendLocation">
+      <view class="tool-icon">📍</view>
+      <text class="tool-text">位置</text>
+    </view>
+  </view>
+
+</view>

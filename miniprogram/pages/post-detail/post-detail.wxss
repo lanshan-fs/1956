@@ -3,10 +3,7 @@ page {
 }
 
 .page-detail {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  box-sizing: border-box;
+  min-height: 100vh;
 }
 
 /* 1. 自定义导航栏 */
@@ -15,28 +12,27 @@ page {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--background);
   z-index: 1000;
-  border-bottom: 2rpx solid var(--border-color);
+  background-color: var(--background);
+  border-bottom: 2rpx solid #EAEAEA;
 }
 
 .nav-content-wrapper {
   position: absolute;
   left: 0;
-  width: 100%;
-  /* 高度和 top 由 WXML 动态控制 */
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 16rpx;
+  width: 100%;
+  padding-left: 24rpx;
   box-sizing: border-box;
 }
 
 .nav-left {
-  width: 60rpx; /* 稍宽便于点击 */
-  height: 100%;
+  width: 60rpx;
+  height: 60rpx;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .icon-back {
@@ -45,7 +41,6 @@ page {
   border-left: 4rpx solid #1A1A1A;
   border-bottom: 4rpx solid #1A1A1A;
   transform: rotate(45deg);
-  margin-left: 8rpx;
 }
 
 .nav-center {
@@ -55,9 +50,15 @@ page {
   margin-left: 20rpx;
 }
 
+/* 动态模式下的头像昵称 */
+.user-mini-profile {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
 .mini-avatar {
-  width: 56rpx;
-  height: 56rpx;
+  width: 52rpx;
+  height: 52rpx;
   border-radius: 50%;
   border: 2rpx solid #1A1A1A;
   margin-right: 12rpx;
@@ -67,47 +68,53 @@ page {
   font-size: 26rpx;
   font-weight: 700;
   color: #1A1A1A;
-  margin-right: 16rpx;
-  max-width: 200rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  margin-right: 12rpx;
 }
 
 .mini-follow-btn {
   font-size: 22rpx;
-  padding: 4rpx 16rpx;
-  border: 2rpx solid #1A1A1A;
-  border-radius: 999rpx;
-  background: #FFD93D;
-  color: #1A1A1A;
+  padding: 4rpx 20rpx;
+  border: 2rpx solid var(--primary);
+  color: var(--primary);
+  border-radius: 30rpx;
   font-weight: 700;
 }
 
-.nav-right-placeholder {
-  width: 180rpx; /* 预留给胶囊的位置 */
-  height: 100%;
+/* 集市模式下的搜索图标 */
+.market-nav-title {
+  display: flex;
+  align-items: center;
 }
 
-/* 滚动区域 */
-.detail-scroll {
-  width: 100%;
-  height: 100vh; /* 占满全屏 */
-  box-sizing: border-box;
-  /* padding-top 由 style 动态设置 */
+.search-icon-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2rpx solid #000;
+  border-radius: 50%;
+  box-shadow: 2rpx 2rpx 0 0 #000;
+  margin-right: 20rpx;
 }
 
-/* 2. 轮播图 */
+.nav-title-text {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #1A1A1A;
+}
+
+/* 2. 图片轮播 */
 .media-swiper-wrapper {
   position: relative;
-  margin-bottom: 24rpx;
-  border-bottom: 4rpx solid #1A1A1A;
+  width: 100%;
+  background-color: #000;
 }
 
 .media-swiper {
   width: 100%;
-  height: 750rpx; /* 1:1 比例 */
-  background: #f0f0f0;
+  height: 800rpx; /* 可根据需要调整 */
 }
 
 .swiper-img {
@@ -118,102 +125,177 @@ page {
 .swiper-indicator {
   position: absolute;
   bottom: 24rpx;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   display: flex;
+  justify-content: center;
   gap: 12rpx;
-  background: rgba(0,0,0,0.5);
-  padding: 8rpx 16rpx;
-  border-radius: 999rpx;
 }
 
 .dot {
   width: 12rpx;
   height: 12rpx;
   border-radius: 50%;
-  background: #fff;
-  opacity: 0.5;
-  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .dot.active {
-  opacity: 1;
-  transform: scale(1.2);
+  background: #fff;
+  width: 24rpx;
+  border-radius: 6rpx;
 }
 
-/* 3. 内容区 */
+/* 3. 内容主体 */
 .content-body {
-  padding: 0 32rpx;
-  margin-bottom: 40rpx;
+  padding: 30rpx 30rpx 20rpx;
+  background-color: var(--background);
 }
 
+/* 集市专属：卖家信息 & 价格 */
+.market-seller-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding: 16rpx;
+  background: #fff;
+  border: 3rpx solid #000;
+  border-radius: 12rpx;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+}
+
+.seller-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border: 3rpx solid #000;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.seller-info {
+  flex: 1;
+}
+
+.seller-name {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 4rpx;
+}
+
+.seller-last-seen {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.seller-arrow {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.market-price-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 24rpx;
+  padding: 20rpx 0;
+  border-bottom: 2rpx dashed #EAEAEA;
+}
+
+.price-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 12rpx;
+  font-weight: 600;
+}
+
+.currency {
+  font-size: 32rpx;
+  font-weight: 900;
+  color: var(--primary);
+  margin-right: 4rpx;
+}
+
+.price-value {
+  font-size: 52rpx;
+  font-weight: 900;
+  color: var(--primary);
+  font-family: 'Arial', sans-serif;
+}
+
+/* 通用标题内容 */
 .post-title {
-  font-size: 36rpx;
+  font-size: 38rpx;
   font-weight: 900;
   color: #1A1A1A;
-  margin-bottom: 24rpx;
   line-height: 1.4;
+  margin-bottom: 24rpx;
 }
 
 .post-text {
   font-size: 30rpx;
-  line-height: 1.8;
   color: #333;
+  line-height: 1.6;
   white-space: pre-wrap;
-  margin-bottom: 24rpx;
-  display: block;
+  margin-bottom: 30rpx;
 }
 
 .post-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 16rpx;
-  margin-bottom: 24rpx;
+  gap: 12rpx;
+  margin-bottom: 30rpx;
 }
 
 .tag-item {
-  color: #4A90E2;
-  font-weight: 700;
-  font-size: 28rpx;
+  font-size: 26rpx;
+  color: #576b95; /* 类似社交软件标签色 */
+  font-weight: 600;
 }
 
 .post-meta-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.meta-date {
   font-size: 24rpx;
   color: #999;
-  margin-top: 16rpx;
+}
+
+.meta-views {
+  font-size: 24rpx;
+  color: #999;
 }
 
 .divider-line {
-  height: 2rpx;
-  background: #EAEAEA;
-  margin-top: 32rpx;
+  height: 1rpx;
+  background-color: #EAEAEA;
+  margin-top: 30rpx;
 }
 
 /* 4. 评论区 */
 .comments-section {
-  padding: 32rpx;
+  padding: 30rpx;
 }
 
 .comments-header {
   font-size: 28rpx;
-  font-weight: 800;
-  margin-bottom: 24rpx;
+  font-weight: 900;
+  color: #1A1A1A;
+  margin-bottom: 30rpx;
 }
 
 .comment-item {
   display: flex;
-  margin-bottom: 32rpx;
+  margin-bottom: 40rpx;
 }
 
 .c-avatar {
   width: 64rpx;
   height: 64rpx;
   border-radius: 50%;
-  border: 2rpx solid #1A1A1A;
-  margin-right: 16rpx;
+  border: 1rpx solid #eee;
+  margin-right: 20rpx;
   flex-shrink: 0;
 }
 
@@ -222,74 +304,72 @@ page {
 }
 
 .c-name {
-  font-size: 26rpx;
+  font-size: 24rpx;
+  font-weight: 700;
   color: #666;
-  font-weight: 600;
   margin-bottom: 8rpx;
 }
 
 .c-text {
   font-size: 28rpx;
-  color: #1A1A1A;
-  line-height: 1.4;
+  color: #333;
+  line-height: 1.5;
 }
 
 .c-time {
   font-size: 22rpx;
   color: #999;
-  margin-left: 12rpx;
+  margin-top: 8rpx;
 }
 
 .c-like {
-  padding-left: 20rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 60rpx;
+  text-align: right;
+  font-size: 28rpx;
   color: #999;
-  font-size: 32rpx;
 }
 
 .empty-comments {
+  padding: 60rpx 0;
   text-align: center;
-  padding: 40rpx 0;
+  font-size: 24rpx;
   color: #999;
-  font-size: 26rpx;
 }
 
-/* 5. 底部操作栏 */
+/* 5. 底部固定栏 */
 .footer-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #fff;
-  border-top: 4rpx solid #1A1A1A;
+  background-color: var(--background);
+  border-top: 1rpx solid #EAEAEA;
   display: flex;
   align-items: center;
-  padding: 0 24rpx;
-  box-sizing: border-box;
-  z-index: 100;
-  /* 适配 iPhone X 底部 */
-  padding-bottom: calc(env(safe-area-inset-bottom) + 12rpx);
-  padding-top: 12rpx;
+  padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
+  z-index: 1001;
 }
 
 .input-wrapper {
   flex: 1;
   height: 72rpx;
-  background: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 36rpx;
   display: flex;
   align-items: center;
   padding: 0 24rpx;
   margin-right: 24rpx;
-  border: 2rpx solid #1A1A1A;
+}
+
+.icon-edit {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 12rpx;
 }
 
 .placeholder-text {
-  font-size: 28rpx;
-  color: #888;
-  margin-left: 12rpx;
+  font-size: 26rpx;
+  color: #999;
 }
 
 .action-group {
@@ -303,77 +383,86 @@ page {
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-width: 60rpx;
 }
 
 .icon-heart, .icon-star, .icon-comment {
-  font-size: 44rpx;
-  color: #1A1A1A;
+  font-size: 40rpx;
+  color: #333;
   line-height: 1;
-  transition: transform 0.2s;
 }
 
 .icon-heart.active {
-  color: #FF4D4F;
-  transform: scale(1.1);
+  color: var(--primary);
 }
 
 .icon-star.active {
-  color: #FFD93D;
-  transform: scale(1.1);
+  color: var(--accent);
 }
 
 .action-count {
   font-size: 20rpx;
-  color: #1A1A1A;
+  color: #666;
   margin-top: 4rpx;
-  font-weight: 700;
 }
 
-/* 输入框面板 */
+/* 集市详情按钮 */
+.contact-btn {
+  background-color: var(--accent);
+  color: #000;
+  font-size: 28rpx;
+  font-weight: 900;
+  padding: 16rpx 40rpx;
+  border: 4rpx solid #000;
+  border-radius: 12rpx;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+  white-space: nowrap;
+}
+
+.contact-btn:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 2rpx 2rpx 0 0 #000;
+}
+
+/* 输入面板 */
 .comment-popup-mask {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 150;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 2000;
 }
 
 .comment-input-panel {
   position: fixed;
   left: 0;
-  right: 0;
+  width: 100%;
   background: #fff;
   padding: 24rpx;
-  border-top: 4rpx solid #1A1A1A;
-  z-index: 200;
-  /* 适配键盘 */
-  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
   display: flex;
   align-items: flex-end;
+  box-sizing: border-box;
+  z-index: 2001;
+  transition: bottom 0.3s;
+  border-radius: 32rpx 32rpx 0 0;
 }
 
 .real-input {
   flex: 1;
-  background: #F5F5F5;
-  padding: 16rpx;
+  background: #f8f8f8;
   border-radius: 16rpx;
-  border: 2rpx solid #1A1A1A;
-  height: 120rpx;
-  font-size: 30rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  height: 160rpx;
   margin-right: 20rpx;
 }
 
 .send-btn {
-  background: #FFD93D;
-  color: #1A1A1A;
-  font-weight: 800;
+  background: var(--primary);
+  color: #fff;
   padding: 16rpx 32rpx;
-  border: 3rpx solid #1A1A1A;
-  border-radius: 12rpx;
-  box-shadow: 4rpx 4rpx 0 #1A1A1A;
-}
-
-.send-btn:active {
-  transform: translate(2rpx, 2rpx);
-  box-shadow: 2rpx 2rpx 0 #1A1A1A;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 700;
 }

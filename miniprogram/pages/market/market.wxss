@@ -1,1 +1,142 @@
 /* pages/market/market.wxss */
+page {
+  background-color: var(--background);
+  /* Ensure scrolling */
+  padding-bottom: 120rpx; 
+}
+
+/* --- 顶部导航栏 --- */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: var(--background);
+  border-bottom: 4rpx solid #000;
+  box-sizing: border-box;
+}
+
+.nav-content {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 校区选择器 */
+.campus-picker {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 4rpx solid #000;
+  padding: 0 20rpx;
+  border-radius: 40rpx;
+  margin-right: 16rpx;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+  flex-shrink: 0;
+}
+
+.campus-picker:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 2rpx 2rpx 0 0 #000;
+}
+
+.campus-text {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #000;
+  margin-right: 6rpx;
+}
+
+.picker-arrow {
+  font-size: 18rpx;
+  color: #000;
+}
+
+/* 搜索框 */
+.search-bar {
+  flex: 1;
+  background-color: #fff;
+  border: 4rpx solid #000;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+  /* Ensure it doesn't overlap with capsule too much if calculation is off */
+  min-width: 100rpx; 
+}
+
+.search-placeholder {
+  margin-left: 12rpx;
+  font-size: 26rpx;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- 标签选项卡 --- */
+.tabs-wrapper {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background-color: var(--background);
+  /* 模仿首页的下方细灰线 */
+  border-bottom: 2rpx solid #EAEAEA;
+}
+
+/* --- 瀑布流 --- */
+.waterfall-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* 极小间距优化：左 6rpx，右 10rpx (平衡右侧卡片阴影) */
+  padding: 0 10rpx 0 6rpx;
+  /* Ensure content starts after the fixed header */
+  margin-top: 10rpx; 
+}
+
+.waterfall-col {
+  /* 50vw - 间距(Total 26rpx / 2 = 13rpx) */
+  width: calc(50vw - 13rpx);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 悬浮按钮 (FAB) --- */
+.fab-btn {
+  position: fixed;
+  bottom: 220rpx; /* Increased to avoid TabBar overlap */
+  right: 40rpx;
+  background-color: #FFD93D;
+  border: 4rpx solid #000;
+  border-radius: 50rpx;
+  padding: 16rpx 32rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 8rpx 8rpx 0 0 #000;
+  z-index: 200;
+  transition: all 0.2s;
+}
+
+.fab-btn:active {
+  transform: translate(4rpx, 4rpx);
+  box-shadow: 4rpx 4rpx 0 0 #000;
+}
+
+.fab-icon {
+  font-size: 40rpx;
+  font-weight: 900;
+  margin-right: 8rpx;
+  line-height: 1;
+}
+
+.fab-text {
+  font-size: 28rpx;
+  font-weight: 800;
+}

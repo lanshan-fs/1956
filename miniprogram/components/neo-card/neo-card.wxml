@@ -6,6 +6,7 @@
       mode="widthFix" 
       lazy-load
     />
+    <view class="price-tag" wx:if="{{price}}">¥{{price}}</view>
   </view>
   
   <view class="card-content">

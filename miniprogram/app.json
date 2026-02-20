@@ -9,7 +9,8 @@
     "pages/profile/profile",
     "pages/cert/cert",
     "pages/settings/settings",
-    "pages/profile-edit/profile-edit"
+    "pages/profile-edit/profile-edit",
+    "pages/chat/chat"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,2 +1,60 @@
 <!--pages/market/market.wxml-->
-<text>pages/market/market.wxml</text>
+<view class="container">
+  <!-- 顶部导航栏 (Fixed) -->
+  <view class="custom-nav" style="height: {{navBarHeight}}px;">
+    <!-- 内容区域，与胶囊对齐 -->
+    <view 
+      class="nav-content" 
+      style="top: {{menuButtonTop}}px; height: {{menuButtonHeight}}px; padding-right: {{navContentRightPadding}}px; padding-left: 12px;"
+    >
+      <!-- 校区选择 -->
+      <picker bindchange="onCampusChange" value="{{campusIndex}}" range="{{campuses}}">
+        <view class="campus-picker" style="height: {{menuButtonHeight}}px;">
+          <text class="campus-text">{{campuses[campusIndex]}}</text>
+          <view class="picker-arrow">▼</view>
+        </view>
+      </picker>
+
+      <!-- 搜索框 -->
+      <view class="search-bar" style="height: {{menuButtonHeight}}px;" bindtap="onSearchTap">
+        <icon type="search" size="14" color="#1A1A1A"/>
+        <text class="search-placeholder">搜索...</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签选项卡 (Sticky below nav) -->
+  <view class="tabs-wrapper" style="top: {{navBarHeight}}px;">
+    <neo-tabs 
+      tabs="{{categories}}" 
+      active="{{activeCategory}}" 
+      bind:change="onCategoryChange"
+    />
+  </view>
+
+  <!-- 占位符，防止内容被 header 遮挡 -->
+  <view style="height: {{navBarHeight + tabsHeight}}px;"></view>
+
+  <!-- 瀑布流内容区 -->
+  <view class="waterfall-container">
+    <!-- 左列 -->
+    <view class="waterfall-col">
+      <block wx:for="{{leftList}}" wx:key="id">
+        <neo-goods-card item="{{item}}" bind:click="onItemTap" />
+      </block>
+    </view>
+
+    <!-- 右列 -->
+    <view class="waterfall-col">
+      <block wx:for="{{rightList}}" wx:key="id">
+        <neo-goods-card item="{{item}}" bind:click="onItemTap" />
+      </block>
+    </view>
+  </view>
+
+  <!-- 发布按钮 -->
+  <view class="fab-btn" bindtap="onPostTap">
+    <text class="fab-icon">+</text>
+    <text class="fab-text">发布闲置</text>
+  </view>
+</view>

@@ -1,11 +1,11 @@
 /* Neobrutalism Card Style (Updated) */
 .neo-card {
   width: 100%;
-  background: #ffffff;
-  border: 2rpx solid #1A1A1A;
-  border-radius: 16rpx;
+  background: var(--background);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-md);
   /* 硬朗阴影，制造悬浮感 */
-  box-shadow: 6rpx 6rpx 0 0 #1A1A1A;
+  box-shadow: var(--neo-shadow);
   overflow: hidden;
   margin-bottom: 24rpx; /* 卡片间距 */
   transition: transform 0.1s ease, box-shadow 0.1s ease;
@@ -16,15 +16,15 @@
 
 /* 交互反馈：按下时阴影消失，卡片位移 */
 .neo-card:active {
-  transform: translate(4rpx, 4rpx);
-  box-shadow: 2rpx 2rpx 0 0 #1A1A1A;
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: var(--neo-shadow-active);
 }
 
 /* 图片容器：增加背景色，处理长宽比异常 */
 .card-image-wrapper {
   width: 100%;
   background-color: #FAFAFA;
-  border-bottom: 2rpx solid #1A1A1A;
+  border-bottom: var(--border-width) solid var(--border-color);
   overflow: hidden;
   min-height: 200rpx; /* 最小高度 */
   position: relative;
@@ -35,19 +35,36 @@
   display: block; /* 消除图片底部空隙 */
 }
 
+/* 价格标签 */
+.price-tag {
+  position: absolute;
+  bottom: 12rpx;
+  right: 12rpx;
+  background-color: var(--accent);
+  color: var(--text-main);
+  padding: 4rpx 12rpx;
+  font-size: 24rpx;
+  font-weight: 800;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: 2rpx 2rpx 0 0 var(--border-color);
+  z-index: 2;
+}
+
+
 /* 内容区 */
 .card-content {
-  padding: 20rpx;
+  padding: 16rpx;
   background-color: #fff;
 }
 
 /* 标题：加粗，更紧凑 */
 .card-title {
-  font-size: 28rpx;
+  font-size: 26rpx;
   font-weight: 800; /* Extra Bold */
-  color: #1A1A1A;
+  color: var(--text-main);
   line-height: 1.4;
-  margin-bottom: 24rpx;
+  margin-bottom: 16rpx;
   letter-spacing: 0.5rpx;
 }
 
@@ -64,12 +81,13 @@
   align-items: center;
   flex: 1; /* 占据剩余空间 */
   overflow: hidden; /* 防止溢出 */
+  margin-right: 16rpx;
 }
 
 .avatar {
   width: 40rpx;
   height: 40rpx;
-  border: 2rpx solid #1A1A1A;
+  border: var(--border-width) solid var(--border-color);
   border-radius: 50%;
   margin-right: 12rpx;
   background-color: #eee;
@@ -80,7 +98,7 @@
   font-size: 22rpx;
   color: #666;
   font-weight: 600;
-  max-width: 160rpx;
+  /* max-width: 160rpx; removed fixed width */ 
 }
 
 /* 点赞区域 */
@@ -88,7 +106,7 @@
   display: flex;
   align-items: center;
   /* 增加点击热区 */
-  padding: 8rpx 0 8rpx 16rpx; 
+  padding: 8rpx 0 8rpx 8rpx; 
 }
 
 /* 心形图标 - 使用 CSS 绘制或 Unicode */
@@ -103,25 +121,25 @@
 
 .heart-icon::before {
   content: '♡'; /* 空心心 */
-  font-size: 32rpx;
-  line-height: 24rpx;
-  color: #1A1A1A;
+  font-size: 32rpx; /* 调整大小 */
+  line-height: 24rpx; /* 垂直居中 */
+  color: var(--text-main);
   font-weight: 900;
   position: absolute;
-  top: -4rpx;
+  top: -4rpx; /*微调位置*/
   left: 0;
   transition: all 0.2s;
 }
 
 .heart-icon.liked::before {
   content: '♥'; /* 实心心 */
-  color: #FF4D4F; /* 小红书红 */
+  color: var(--primary); /* 朱砂红 */
   transform: scale(1.1);
 }
 
 .like-count {
   font-size: 24rpx;
-  color: #1A1A1A;
+  color: var(--text-main);
   font-weight: 700;
   font-family: 'Arial', sans-serif;
 }

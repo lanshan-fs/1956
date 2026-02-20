@@ -1,0 +1,24 @@
+<view class="tabs-container">
+  <scroll-view 
+    class="tabs-scroll" 
+    scroll-x 
+    enable-flex 
+    show-scrollbar="{{false}}"
+    scroll-with-animation
+    scroll-into-view="tab-{{active > 1 ? active - 1 : 0}}"
+  >
+    <view class="scroll-inner">
+      <block wx:for="{{tabs}}" wx:key="*this">
+        <view 
+          id="tab-{{index}}"
+          class="tab-item {{active === index ? 'active' : ''}}" 
+          bindtap="onTap" 
+          data-index="{{index}}"
+        >
+          {{rangeKey ? item[rangeKey] : item}}
+        </view>
+      </block>
+      <view class="spacer"></view>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,247 @@
+/* pages/chat/chat.wxss */
+page {
+  background-color: var(--background);
+}
+
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 1. 导航栏 */
+.chat-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--background);
+  border-bottom: 4rpx solid #000; /* Neobrutalism */
+}
+
+.nav-content-wrapper {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+
+.nav-left {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-back {
+  width: 18rpx;
+  height: 18rpx;
+  border-left: 5rpx solid #000;
+  border-bottom: 5rpx solid #000;
+  transform: rotate(45deg);
+}
+
+.nav-center {
+  flex: 1;
+  text-align: left;
+  margin-left: 20rpx;
+}
+
+.chat-nickname {
+  font-size: 32rpx;
+  font-weight: 900;
+  color: #000;
+}
+
+.nav-right {
+  margin-right: 20rpx;
+}
+
+.icon-more {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: #000;
+}
+
+/* 2. 聊天区 */
+.chat-scroll {
+  flex: 1;
+  background-color: var(--background);
+}
+
+.chat-content {
+  padding: 30rpx 24rpx;
+}
+
+.time-stamp {
+  text-align: center;
+  font-size: 22rpx;
+  color: #999;
+  margin: 30rpx 0;
+}
+
+.message-row {
+  display: flex;
+  margin-bottom: 32rpx;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  border: 4rpx solid #000;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+  flex-shrink: 0;
+}
+
+.bubble-wrapper {
+  max-width: 60%;
+  margin: 0 20rpx;
+}
+
+/* 其他人消息 (左侧) */
+.row-other {
+  flex-direction: row;
+}
+
+.row-other .bubble {
+  background-color: #fff;
+  border: 4rpx solid #000;
+  border-radius: 4rpx 20rpx 20rpx 20rpx;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+}
+
+/* 自己消息 (右侧) */
+.row-me {
+  flex-direction: row-reverse;
+}
+
+.row-me .bubble {
+  background-color: var(--primary); /* 朱砂红 */
+  color: #fff;
+  border: 4rpx solid #000;
+  border-radius: 20rpx 4rpx 20rpx 20rpx;
+  box-shadow: -4rpx 4rpx 0 0 #000;
+}
+
+.bubble {
+  padding: 16rpx 24rpx;
+  font-size: 30rpx;
+  line-height: 1.5;
+  word-break: break-all;
+  transition: all 0.1s;
+}
+
+.bubble-image {
+  padding: 4rpx;
+  overflow: hidden;
+}
+
+.msg-image {
+  width: 100%;
+  border-radius: 8rpx;
+  display: block;
+}
+
+/* 3. 输入栏 */
+.input-bar {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: var(--background);
+  border-top: 4rpx solid #000;
+  display: flex;
+  align-items: center;
+  padding: 16rpx 20rpx calc(16rpx + env(safe-area-inset-bottom));
+  z-index: 1001;
+}
+
+.icon-btn {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  background-color: #fff;
+  border: 4rpx solid #000;
+  border-radius: 50%;
+  box-shadow: 2rpx 2rpx 0 0 #000;
+  flex-shrink: 0;
+}
+
+.icon-btn:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 0 0 0 0 #000;
+}
+
+.input-wrapper {
+  flex: 1;
+  margin: 0 16rpx;
+}
+
+.chat-input {
+  height: 72rpx;
+  background-color: #fff;
+  border: 4rpx solid #000;
+  border-radius: 36rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+}
+
+.more-btn {
+  background-color: var(--accent); /* 连翘黄 */
+  font-weight: 900;
+}
+
+/* 功能面板 */
+.tools-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 4rpx solid #000;
+  display: flex;
+  padding: 40rpx 20rpx;
+  box-sizing: border-box;
+  gap: 40rpx;
+  z-index: 1000;
+}
+
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tool-icon {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #fff;
+  border: 4rpx solid #000;
+  border-radius: 24rpx;
+  box-shadow: 4rpx 4rpx 0 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  margin-bottom: 12rpx;
+}
+
+.tool-icon:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 2rpx 2rpx 0 0 #000;
+}
+
+.tool-text {
+  font-size: 24rpx;
+  color: #666;
+  font-weight: 700;
+}

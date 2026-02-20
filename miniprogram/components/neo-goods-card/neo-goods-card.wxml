@@ -1,0 +1,24 @@
+<view class="goods-card" bind:tap="onTap">
+  <view class="image-wrapper">
+    <image class="goods-image" src="{{item.cover}}" mode="widthFix" lazy-load />
+    <view class="campus-tag" wx:if="{{item.campus}}">{{item.campus}}</view>
+  </view>
+  
+  <view class="content">
+    <view class="title-row">
+      <text class="goods-title">{{item.title}}</text>
+    </view>
+    
+    <view class="price-row">
+      <text class="currency">¥</text>
+      <text class="price">{{item.price}}</text>
+      <text class="condition" wx:if="{{item.condition}}">{{item.condition}}</text>
+    </view>
+    
+    <view class="seller-row">
+      <image class="seller-avatar" src="{{item.avatar || '/images/default-avatar.png'}}" />
+      <text class="seller-name">{{item.nickname}}</text>
+      <view class="wants" wx:if="{{item.wants > 0}}">{{item.wants}}人浏览</view>
+    </view>
+  </view>
+</view>

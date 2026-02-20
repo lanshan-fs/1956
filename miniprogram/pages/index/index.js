@@ -62,8 +62,9 @@ Page({
 
   // 1. 点击 Tab (顶部滚动栏 或 弹窗内的非编辑状态)
   switchTab(e) {
-    const index = e.currentTarget.dataset.index;
-    const isPopup = e.currentTarget.dataset.popup || false;
+    // 兼容组件事件与原生事件
+    const index = (e.detail && e.detail.index !== undefined) ? e.detail.index : e.currentTarget.dataset.index;
+    const isPopup = e.currentTarget ? (e.currentTarget.dataset.popup || false) : false;
 
     // 如果在编辑模式下点击“我的频道”，则是删除操作（“全部”除外）
     if (isPopup && this.data.isEditMode) {

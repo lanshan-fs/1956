@@ -1,0 +1,122 @@
+/* Neobrutalism Goods Card */
+.goods-card {
+  width: 100%;
+  background: #fff;
+  border: 4rpx solid #000;
+  border-radius: 16rpx;
+  /* 紧凑阴影 */
+  box-shadow: 4rpx 4rpx 0 0 #000;
+  overflow: hidden;
+  /* 紧凑垂直间距 */
+  margin-bottom: 10rpx;
+  transition: transform 0.1s ease;
+}
+
+.goods-card:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 2rpx 2rpx 0 0 #000;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  background: #f8f8f8;
+  border-bottom: 4rpx solid #000;
+  min-height: 200rpx;
+}
+
+.goods-image {
+  width: 100%;
+  display: block;
+}
+
+.campus-tag {
+  position: absolute;
+  top: 12rpx;
+  left: 12rpx;
+  background: #000;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.content {
+  padding: 16rpx;
+}
+
+.title-row {
+  margin-bottom: 12rpx;
+}
+
+.goods-title {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #000;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+}
+
+.currency {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #FF4D4D; /* Primary color */
+  margin-right: 4rpx;
+}
+
+.price {
+  font-size: 36rpx;
+  font-weight: 900;
+  color: #FF4D4D;
+  margin-right: 12rpx;
+  font-family: 'Arial', sans-serif; /* Cleaner numbers */
+}
+
+.condition {
+  font-size: 20rpx;
+  color: #000;
+  background: #FFD93D; /* Accent yellow */
+  padding: 2rpx 8rpx;
+  border: 2rpx solid #000;
+  border-radius: 6rpx;
+  font-weight: 700;
+}
+
+.seller-row {
+  display: flex;
+  align-items: center;
+}
+
+.seller-avatar {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  border: 2rpx solid #000;
+  margin-right: 8rpx;
+  background: #eee;
+}
+
+.seller-name {
+  font-size: 20rpx;
+  color: #666;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.wants {
+  font-size: 20rpx;
+  color: #888;
+}

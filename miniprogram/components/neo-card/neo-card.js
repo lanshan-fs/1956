@@ -12,6 +12,10 @@ Component({
     isLiked: {
       type: Boolean,
       value: false
+    },
+    price: {
+      type: String,
+      value: ''
     }
   },
   methods: {

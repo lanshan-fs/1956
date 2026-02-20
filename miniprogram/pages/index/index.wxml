@@ -14,35 +14,19 @@
   <!-- 内容区 PaddingTop -->
   <view class="scroll-content" style="padding-top: {{navHeaderHeight}}px;">
     
-    <!-- Block 2: 标签栏 (Flex 布局修复错位) -->
+    <!-- Block 2: 标签栏 (已组件化) -->
     <view class="tabs-section" style="top: {{navHeaderHeight}}px; height: {{tabHeight}}px;">
-      <scroll-view 
-        scroll-x 
-        class="tabs-scroll" 
-        enable-flex 
-        scroll-into-view="tab-{{currentTab > 2 ? currentTab - 2 : 0}}"
-        show-scrollbar="{{false}}"
-        scroll-with-animation
-        enhanced
-        fast-deceleration
-      >
-        <view class="tabs-container">
-          <view 
-            wx:for="{{myChannels}}" 
-            wx:key="id" 
-            id="tab-{{index}}"
-            class="tab-item {{currentTab === index ? 'active' : ''}}"
-            bindtap="switchTab"
-            data-index="{{index}}"
-          >
-            {{item.name}}
-          </view>
-          <!-- 尾部占位，防止最后一个被遮挡 -->
-          <view style="width: 24rpx; flex-shrink: 0;"></view>
-        </view>
-      </scroll-view>
+      <!-- 使用 neo-tabs 组件，传入 flex: 1 让其占据左侧空间 -->
+      <view style="flex: 1; overflow: hidden;">
+        <neo-tabs 
+          tabs="{{myChannels}}" 
+          active="{{currentTab}}" 
+          rangeKey="name"
+          bind:change="switchTab"
+        />
+      </view>
 
-      <!-- 更多/编辑按钮 (Flex Item) -->
+      <!-- 更多/编辑按钮 (保持不变) -->
       <view class="tabs-more-btn {{showChannelPopup ? 'open' : ''}}" bindtap="toggleChannelPopup">
         <view class="icon-chevron"></view>
       </view>
