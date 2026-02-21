@@ -1,0 +1,72 @@
+<neo-nav title="高级选项" leftIcon="back"></neo-nav>
+
+<view class="container page-advanced">
+  
+  <!-- 分组 1: 权限控制 -->
+  <view class="section">
+    <view class="section-title">内容权限</view>
+    <view class="cell-group shadow-box">
+      <view class="cell">
+        <view class="cell-label">
+          <text class="main">允许他人保存图片</text>
+          <text class="sub">关闭后，他人无法长按保存你的图片</text>
+        </view>
+        <switch checked="{{allowSave}}" color="#FF4D4D" bindchange="onToggleSave" />
+      </view>
+      <view class="divider"></view>
+      <view class="cell">
+        <view class="cell-label">
+          <text class="main">允许他人引用/合拍</text>
+          <text class="sub">允许他人使用你的内容进行创作</text>
+        </view>
+        <switch checked="{{allowRemix}}" color="#FF4D4D" bindchange="onToggleRemix" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 分组 2: 互动管理 -->
+  <view class="section">
+    <view class="section-title">互动管理</view>
+    <view class="cell-group shadow-box">
+      <view class="cell">
+        <view class="cell-label">
+          <text class="main">匿名发布</text>
+          <text class="sub">发布后将以“某不愿透露姓名的同学”展示</text>
+        </view>
+        <switch checked="{{isAnonymous}}" color="#FFD93D" bindchange="onToggleAnonymous" />
+      </view>
+      <view class="divider"></view>
+      <view class="cell">
+        <view class="cell-label">
+          <text class="main">关闭评论区</text>
+        </view>
+        <switch checked="{{closeComment}}" color="#000" bindchange="onToggleComment" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 分组 3: 附加功能 -->
+  <view class="section">
+    <view class="section-title">其他</view>
+    <view class="cell-group shadow-box">
+      <view class="cell arrow-cell" bindtap="showCopyright">
+        <view class="cell-label">
+          <text class="main">版权声明</text>
+        </view>
+        <view class="cell-value">{{copyrightText}} ></view>
+      </view>
+      <view class="divider"></view>
+      <view class="cell">
+        <view class="cell-label">
+          <text class="main">开启赞赏 (校豆)</text>
+          <text class="sub">觉得有帮助？让校友为你投喂校豆吧</text>
+        </view>
+        <switch checked="{{allowDonate}}" color="#2ECC71" bindchange="onToggleDonate" />
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-tips">
+    部分高级设置在发布后不可更改，请仔细核对。
+  </view>
+</view>

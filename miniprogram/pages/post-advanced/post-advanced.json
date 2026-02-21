@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "发布",
+  "navigationBarTitleText": "高级选项",
   "navigationStyle": "custom",
   "usingComponents": {
     "neo-nav": "/components/neo-nav/neo-nav"

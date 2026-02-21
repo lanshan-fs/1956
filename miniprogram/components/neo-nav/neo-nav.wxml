@@ -4,8 +4,10 @@
     <!-- 默认模式 -->
     <block wx:if="{{mode === 'default'}}">
       <view class="nav-content">
-        <view class="nav-left" bindtap="onSearch">
-          <icon type="search" size="20" color="#1A1A1A"/>
+        <view class="nav-left" bindtap="onLeftTap">
+          <!-- 动态左侧图标 -->
+          <icon wx:if="{{leftIcon === 'search'}}" type="search" size="20" color="#1A1A1A"/>
+          <view wx:else class="back-icon"></view>
         </view>
         <view class="nav-title" bindtap="onTitleTap">{{title}}</view>
         <view class="nav-right"></view>
@@ -23,4 +25,5 @@
   </view>
   <view class="nav-border"></view>
 </view>
+<!-- 占位，确保 fixed 元素高度被占位 -->
 <view style="height: {{navHeaderHeight}}px;"></view>

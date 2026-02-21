@@ -1,0 +1,92 @@
+page {
+  background-color: var(--background);
+}
+
+.page-advanced {
+  padding: 32rpx 24rpx;
+}
+
+.section {
+  margin-bottom: 48rpx;
+}
+
+.section-title {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+  margin-bottom: 16rpx;
+  margin-left: 12rpx;
+}
+
+.cell-group {
+  background-color: #fff;
+  border: 2px solid var(--border-color);
+  box-shadow: 4px 4px 0 0 var(--border-color);
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 24rpx;
+  transition: background-color 0.2s;
+}
+
+.cell:active {
+  background-color: #fafafa;
+}
+
+.cell-label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-right: 20rpx;
+}
+
+.cell-label .main {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4rpx;
+}
+
+.cell-label .sub {
+  font-size: 22rpx;
+  color: #999;
+  font-weight: 400;
+}
+
+.cell-value {
+  font-size: 26rpx;
+  color: #666;
+  font-weight: 600;
+}
+
+.divider {
+  height: 2rpx;
+  background-color: #f0f0f0;
+  margin: 0 24rpx;
+}
+
+.footer-tips {
+  text-align: center;
+  font-size: 22rpx;
+  color: #ccc;
+  margin-top: 60rpx;
+  padding: 0 60rpx;
+  line-height: 1.6;
+}
+
+/* 覆盖原生 switch 样式使其更符合 Neobrutalism */
+.wx-switch-input {
+  border: 2px solid #000 !important;
+  background: #fff !important;
+}
+.wx-switch-input-checked {
+  background: var(--primary) !important;
+  border-color: #000 !important;
+}

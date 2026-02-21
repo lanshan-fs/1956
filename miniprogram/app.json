@@ -5,6 +5,7 @@
     "pages/post-detail/post-detail",
     "pages/market/market",
     "pages/post/post",
+    "pages/post-advanced/post-advanced",
     "pages/notice/notice",
     "pages/profile/profile",
     "pages/cert/cert",

@@ -1,56 +1,117 @@
-<neo-nav title="发布动态" back="{{true}}" color="#000" background="#fff"></neo-nav>
+<neo-nav title="发布动态" leftIcon="back" bind:heightchange="onNavHeightChange"></neo-nav>
 
-<view class="container">
-  <view class="neo-card input-box">
-    <textarea 
-      class="post-input" 
-      placeholder="在北中医分享你的新鲜事..." 
-      placeholder-style="color:#888;font-weight:bold;"
-      maxlength="1000"
-      bindinput="onContentInput"
-      value="{{content}}"
-    ></textarea>
-  </view>
-
+<view class="container page-post">
+  
+  <!-- 1. 媒体上传区 -->
   <view class="media-section">
-    <view class="grid-3">
-      <block wx:for="{{tempImages}}" wx:key="*this">
-        <view class="grid-item neo-img-box">
-          <image src="{{item}}" mode="aspectFill" class="uploaded-img"></image>
-          <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">×</view>
-        </view>
-      </block>
+    <view class="media-grid">
+      <view 
+        wx:for="{{tempImages}}" 
+        wx:key="*this" 
+        class="media-item shadow-box"
+      >
+        <image src="{{item}}" mode="aspectFill" class="media-img"></image>
+        <view class="media-del" catchtap="deleteImage" data-index="{{index}}">×</view>
+      </view>
       
-      <view class="grid-item add-btn neo-box" bindtap="chooseImage" wx:if="{{tempImages.length < 9}}">
-        <text class="plus-icon">+</text>
+      <view 
+        class="media-item add-btn shadow-box" 
+        bindtap="chooseImage" 
+        wx:if="{{tempImages.length < 9}}"
+      >
+        <view class="add-icon">+</view>
       </view>
     </view>
   </view>
 
-  <view class="tags-section">
-    <view class="section-title">选择话题 #</view>
-    <view class="tag-list">
-      <block wx:for="{{availableTags}}" wx:key="name">
-        <view 
-          class="neo-tag {{selectedTag === item.name ? 'active' : ''}}" 
-          bindtap="selectTag" 
-          data-tag="{{item.name}}"
-          style="{{selectedTag === item.name ? 'background:' + item.color : ''}}"
-        >
-          {{item.name}}
-        </view>
-      </block>
+  <!-- 2. 编辑区 -->
+  <view class="edit-area">
+    <input 
+      class="title-input" 
+      placeholder="填写标题会有更多赞哦~" 
+      placeholder-class="placeholder"
+      maxlength="30"
+      bindinput="onTitleInput"
+      value="{{title}}"
+    />
+    <view class="divider"></view>
+    <textarea 
+      class="content-textarea" 
+      placeholder="添加正文或发语音..." 
+      placeholder-class="placeholder"
+      maxlength="2000"
+      bindinput="onContentInput"
+      value="{{content}}"
+      auto-height
+    ></textarea>
+
+    <!-- 语音预览区 (如果有录音) -->
+    <view wx:if="{{hasVoice}}" class="voice-preview-bubble shadow-box" bindtap="playVoice">
+      <text class="voice-icon">🔊</text>
+      <text class="voice-duration">00:15"</text>
+      <view class="voice-del" catchtap="clearVoice">×</view>
     </view>
   </view>
 
-  <view class="footer-action">
+  <!-- 3. 快捷工具栏 (胶囊化) -->
+  <view class="quick-toolbar">
+    <view class="tool-item" bindtap="showTopicPicker">
+      <text class="tool-icon">#</text>
+      <text class="tool-text">{{selectedTopic || '话题'}}</text>
+    </view>
+    <view class="tool-item" bindtap="mentionUser">
+      <text class="tool-icon">@</text>
+      <text class="tool-text">用户</text>
+    </view>
+    <view class="tool-item" bindtap="toggleVoiceRecord">
+      <text class="tool-icon">🎙️</text>
+      <text class="tool-text">语音</text>
+    </view>
+    <view class="tool-item" bindtap="showVotePopup">
+      <text class="tool-icon">📊</text>
+      <text class="tool-text">{{hasVote ? '已设投票' : '投票'}}</text>
+    </view>
+    <view class="tool-item" bindtap="chooseLocation">
+      <text class="tool-icon">📍</text>
+      <text class="tool-text">{{locationName || '地点'}}</text>
+    </view>
+  </view>
+
+  <!-- 4. 核心设置列表 -->
+  <view class="settings-list">
+    <!-- 谁可见 -->
+    <view class="setting-item shadow-box" bindtap="showPrivacyPopup">
+      <view class="item-left">
+        <text class="item-icon">👁️</text>
+        <text class="item-label">公开范围</text>
+      </view>
+      <view class="item-right">
+        <text class="item-value">{{privacyOptions[privacyIndex]}}</text>
+        <view class="arrow">></view>
+      </view>
+    </view>
+
+    <!-- 高级选项 -->
+    <view class="setting-item shadow-box" bindtap="goToAdvanced">
+      <view class="item-left">
+        <text class="item-icon">⚙️</text>
+        <text class="item-label">高级选项</text>
+      </view>
+      <view class="item-right">
+        <view class="arrow">></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5. 底部动作条 -->
+  <view class="bottom-actions">
+    <view class="draft-btn shadow-box" bindtap="saveDraft">存草稿</view>
     <button 
-      class="neo-button publish-btn" 
-      bindtap="submitPost" 
-      disabled="{{submitting}}"
+      class="post-btn shadow-box {{canPost ? 'active' : ''}}" 
+      bindtap="submitPost"
       loading="{{submitting}}"
     >
-      立即发布
+      发布动态
     </button>
   </view>
 </view>
