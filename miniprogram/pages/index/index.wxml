@@ -7,49 +7,44 @@
     bind:heightchange="onNavHeightChange"
   />
 
-  <!-- 内容区 -->
-  <view class="scroll-content">
-    
-    <!-- Block 2: 标签栏与管理面板 (组件化) -->
-    <neo-tabs-bar
-      tabs="{{myChannels}}"
-      recommendTabs="{{recommendChannels}}"
-      active="{{currentTab}}"
-      top="{{navHeaderHeight}}"
-      bind:change="switchTab"
-      bind:add="addChannel"
-      bind:remove="removeChannel"
-    />
+  <!-- Block 2: 标签栏与管理面板 (组件化) -->
+  <neo-tabs-bar
+    tabs="{{myChannels}}"
+    recommendTabs="{{recommendChannels}}"
+    active="{{currentTab}}"
+    top="{{navHeaderHeight}}"
+    bind:change="switchTab"
+    bind:add="addChannel"
+    bind:remove="removeChannel"
+  />
 
-    <!-- Block 3: 瀑布流 -->
-    <view class="waterfall-container">
-      <view class="column">
-        <block wx:for="{{leftList}}" wx:key="id">
-          <neo-card 
-            title="{{item.title}}" 
-            cover="{{item.cover}}" 
-            nickname="{{item.nickname}}" 
-            likes="{{item.likes}}" 
-            isLiked="{{item.isLiked}}"
-            bind:click="onCardClick"
-            data-id="{{item.id}}"
-          />
-        </block>
-      </view>
-      <view class="column">
-        <block wx:for="{{rightList}}" wx:key="id">
-          <neo-card 
-            title="{{item.title}}" 
-            cover="{{item.cover}}" 
-            nickname="{{item.nickname}}" 
-            likes="{{item.likes}}" 
-            isLiked="{{item.isLiked}}"
-            bind:click="onCardClick"
-            data-id="{{item.id}}"
-          />
-        </block>
-      </view>
+  <!-- Block 3: 瀑布流 -->
+  <view class="waterfall-container">
+    <view class="column">
+      <block wx:for="{{leftList}}" wx:key="id">
+        <neo-card 
+          title="{{item.title}}" 
+          cover="{{item.cover}}" 
+          nickname="{{item.nickname}}" 
+          likes="{{item.likes}}" 
+          isLiked="{{item.isLiked}}"
+          bind:click="onCardClick"
+          data-id="{{item.id}}"
+        />
+      </block>
     </view>
-
+    <view class="column">
+      <block wx:for="{{rightList}}" wx:key="id">
+        <neo-card 
+          title="{{item.title}}" 
+          cover="{{item.cover}}" 
+          nickname="{{item.nickname}}" 
+          likes="{{item.likes}}" 
+          isLiked="{{item.isLiked}}"
+          bind:click="onCardClick"
+          data-id="{{item.id}}"
+        />
+      </block>
+    </view>
   </view>
 </view>

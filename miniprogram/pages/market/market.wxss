@@ -1,8 +1,8 @@
 /* pages/market/market.wxss */
 page {
   background-color: var(--background);
-  /* Ensure scrolling */
-  padding-bottom: 120rpx; 
+  /* 增加底部间距，避开自定义 TabBar */
+  padding-bottom: 200rpx; 
 }
 
 /* --- 顶部组件内元素样式 --- */
@@ -72,15 +72,14 @@ picker[slot="left"] {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  /* 统一间距：16rpx */
-  padding: 16rpx;
-  /* Ensure content starts after the fixed header */
-  margin-top: 10rpx; 
+  /* 统一对称间距：8rpx */
+  padding: 8rpx;
+  box-sizing: border-box;
 }
 
 .waterfall-col {
-  /* 50% - (16rpx / 2 = 8rpx) */
-  width: calc(50% - 8rpx);
+  /* 50% 减去一半的间距 (8rpx / 2 = 4rpx) */
+  width: calc(50% - 4rpx);
   display: flex;
   flex-direction: column;
 }

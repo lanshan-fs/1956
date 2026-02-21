@@ -85,3 +85,5 @@
     </view>
   </view>
 </view>
+<!-- 占位视图：80rpx (tabs-main-row) + 1rpx (bottom-border) -->
+<view style="height: 81rpx;"></view>

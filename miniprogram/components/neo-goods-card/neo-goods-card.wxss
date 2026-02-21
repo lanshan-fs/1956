@@ -1,28 +1,23 @@
-/* Neobrutalism Goods Card */
+/* Refined Clean Card (No Border/Shadow for dense Feed) */
 .goods-card {
   width: 100%;
   background: #fff;
-  border: 4rpx solid #000;
-  border-radius: 16rpx;
-  /* 紧凑阴影 */
-  box-shadow: 4rpx 4rpx 0 0 #000;
+  border-radius: 16rpx; /* 增加圆角，更符合 ToC 审美 */
   overflow: hidden;
-  /* 紧凑垂直间距 */
-  margin-bottom: 10rpx;
-  transition: transform 0.1s ease;
+  margin-bottom: 12rpx; /* 卡片间距 */
+  transition: opacity 0.1s ease;
+  /* 移除 border 和 box-shadow */
 }
 
 .goods-card:active {
-  transform: translate(2rpx, 2rpx);
-  box-shadow: 2rpx 2rpx 0 0 #000;
+  opacity: 0.8;
 }
 
 .image-wrapper {
   position: relative;
   width: 100%;
-  background: #f8f8f8;
-  border-bottom: 4rpx solid #000;
-  min-height: 200rpx;
+  background: #f0f0f0;
+  /* 移除图片下方的黑线 */
 }
 
 .goods-image {
@@ -34,89 +29,72 @@
   position: absolute;
   top: 12rpx;
   left: 12rpx;
-  background: #000;
+  background: rgba(0, 0, 0, 0.6); /* 半透明黑色 */
   color: #fff;
   font-size: 20rpx;
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
-  font-weight: 700;
-  opacity: 0.9;
+  font-weight: 500;
 }
 
 .content {
-  padding: 16rpx;
-}
-
-.title-row {
-  margin-bottom: 12rpx;
+  padding: 16rpx 12rpx;
 }
 
 .goods-title {
   font-size: 26rpx;
-  font-weight: 700;
-  color: #000;
+  font-weight: 600;
+  color: #1A1A1A;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  line-height: 1.4;
 }
 
 .price-row {
   display: flex;
   align-items: baseline;
-  margin-bottom: 16rpx;
+  margin-top: 12rpx;
 }
 
 .currency {
-  font-size: 24rpx;
-  font-weight: 800;
-  color: #FF4D4D; /* Primary color */
-  margin-right: 4rpx;
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #FF4D4D;
 }
 
 .price {
-  font-size: 36rpx;
-  font-weight: 900;
+  font-size: 32rpx;
+  font-weight: bold;
   color: #FF4D4D;
-  margin-right: 12rpx;
-  font-family: 'Arial', sans-serif; /* Cleaner numbers */
+  margin-right: 8rpx;
 }
 
 .condition {
-  font-size: 20rpx;
-  color: #000;
-  background: #FFD93D; /* Accent yellow */
+  font-size: 18rpx;
+  color: #666;
+  background: #f5f5f5;
   padding: 2rpx 8rpx;
-  border: 2rpx solid #000;
-  border-radius: 6rpx;
-  font-weight: 700;
+  border-radius: 4rpx;
 }
 
 .seller-row {
   display: flex;
   align-items: center;
+  margin-top: 12rpx;
 }
 
 .seller-avatar {
-  width: 32rpx;
-  height: 32rpx;
+  width: 28rpx;
+  height: 28rpx;
   border-radius: 50%;
-  border: 2rpx solid #000;
   margin-right: 8rpx;
   background: #eee;
 }
 
 .seller-name {
   font-size: 20rpx;
-  color: #666;
+  color: #999;
   flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.wants {
-  font-size: 20rpx;
-  color: #888;
 }

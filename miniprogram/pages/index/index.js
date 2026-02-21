@@ -41,6 +41,19 @@ Page({
       stickyTop: navHeaderHeight
     });
   },
+
+  onPullDownRefresh() {
+    // 模拟刷新逻辑
+    setTimeout(() => {
+      this.initWaterfall();
+      wx.stopPullDownRefresh();
+      wx.showToast({
+        title: '已更新',
+        icon: 'success',
+        duration: 1000
+      });
+    }, 800);
+  },
   
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
