@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "neo-tabs": "/components/neo-tabs/neo-tabs",
+    "neo-nav": "/components/neo-nav/neo-nav",
+    "neo-tabs-bar": "/components/neo-tabs-bar/neo-tabs-bar",
     "neo-goods-card": "/components/neo-goods-card/neo-goods-card"
   },
   "navigationStyle": "custom"

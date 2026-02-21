@@ -1,99 +1,25 @@
 <view class="container page-home">
   
-  <!-- Block 1: 顶部导航栏 -->
-  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px; height: {{navBarHeight}}px;">
-    <view class="nav-content">
-      <view class="nav-left" bindtap="onSearch">
-        <icon type="search" size="20" color="#1A1A1A"/>
-      </view>
-      <view class="nav-title">1956 | BUCM</view>
-      <view class="nav-right"></view> <!-- 占位保持居中 -->
-    </view>
-  </view>
+  <!-- Block 1: 顶部导航栏 (组件化) -->
+  <neo-nav 
+    title="1956 | BUCM" 
+    bind:search="onSearch" 
+    bind:heightchange="onNavHeightChange"
+  />
 
-  <!-- 内容区 PaddingTop -->
-  <view class="scroll-content" style="padding-top: {{navHeaderHeight}}px;">
+  <!-- 内容区 -->
+  <view class="scroll-content">
     
-    <!-- Block 2: 标签栏 (已组件化) -->
-    <view class="tabs-section" style="top: {{navHeaderHeight}}px; height: {{tabHeight}}px;">
-      <!-- 使用 neo-tabs 组件，传入 flex: 1 让其占据左侧空间 -->
-      <view style="flex: 1; overflow: hidden;">
-        <neo-tabs 
-          tabs="{{myChannels}}" 
-          active="{{currentTab}}" 
-          rangeKey="name"
-          bind:change="switchTab"
-        />
-      </view>
-
-      <!-- 更多/编辑按钮 (保持不变) -->
-      <view class="tabs-more-btn {{showChannelPopup ? 'open' : ''}}" bindtap="toggleChannelPopup">
-        <view class="icon-chevron"></view>
-      </view>
-    </view>
-
-    <!-- 频道管理弹窗 -->
-    <view class="channel-popup-mask {{showChannelPopup ? 'show' : ''}}" bindtap="toggleChannelPopup" catchtouchmove="true">
-      <view 
-        class="channel-popup-body" 
-        catchtap="stopProp"
-        style="top: {{navHeaderHeight}}px;"
-      >
-        <!-- Section 1: 我的频道 -->
-        <view class="popup-section">
-          <view class="popup-header">
-            <view class="popup-title-group">
-              <text class="p-main-title">我的频道</text>
-              <text class="p-sub-title">{{isEditMode ? '点击移除频道' : '点击进入频道'}}</text>
-            </view>
-            <view class="popup-edit-btn {{isEditMode ? 'editing' : ''}}" catchtap="toggleEditMode">
-              {{isEditMode ? '完成' : '编辑'}}
-            </view>
-          </view>
-          
-          <view class="popup-grid">
-            <view 
-              wx:for="{{myChannels}}" 
-              wx:key="id" 
-              class="popup-item {{currentTab === index ? 'active' : ''}} {{isEditMode && index !== 0 ? 'shake' : ''}}"
-              catchtap="{{isEditMode ? 'removeChannel' : 'switchTab'}}"
-              data-index="{{index}}"
-              data-popup="{{true}}"
-            >
-              <text class="p-item-text">{{item.name}}</text>
-              <!-- 移除图标 (仅编辑模式 && 非全部) -->
-              <view wx:if="{{isEditMode && index !== 0}}" class="icon-remove">
-                <view class="line"></view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-        <!-- Section 2: 推荐频道 -->
-        <view class="popup-section">
-          <view class="popup-header">
-            <view class="popup-title-group">
-              <text class="p-main-title">推荐频道</text>
-              <text class="p-sub-title">点击添加频道</text>
-            </view>
-          </view>
-          
-          <view class="popup-grid">
-            <view 
-              wx:for="{{recommendChannels}}" 
-              wx:key="id" 
-              class="popup-item recommend"
-              catchtap="addChannel"
-              data-index="{{index}}"
-            >
-              <view class="icon-add">+</view>
-              <text class="p-item-text">{{item.name}}</text>
-            </view>
-          </view>
-        </view>
-
-      </view>
-    </view>
+    <!-- Block 2: 标签栏与管理面板 (组件化) -->
+    <neo-tabs-bar
+      tabs="{{myChannels}}"
+      recommendTabs="{{recommendChannels}}"
+      active="{{currentTab}}"
+      top="{{navHeaderHeight}}"
+      bind:change="switchTab"
+      bind:add="addChannel"
+      bind:remove="removeChannel"
+    />
 
     <!-- Block 3: 瀑布流 -->
     <view class="waterfall-container">

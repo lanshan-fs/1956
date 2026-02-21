@@ -5,89 +5,66 @@ page {
   padding-bottom: 120rpx; 
 }
 
-/* --- 顶部导航栏 --- */
-.custom-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  background-color: var(--background);
-  border-bottom: 4rpx solid #000;
-  box-sizing: border-box;
+/* --- 顶部组件内元素样式 --- */
+/* 校区选择器包装容器 */
+picker[slot="left"] {
+  height: 100%;
 }
 
-.nav-content {
-  position: absolute;
-  left: 0;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* 校区选择器 */
+/* 校区选择器内部视图 */
 .campus-picker {
   display: flex;
   align-items: center;
   background-color: #fff;
-  border: 4rpx solid #000;
-  padding: 0 20rpx;
-  border-radius: 40rpx;
+  border: var(--border-width) solid var(--border-color);
+  padding: 0 24rpx; /* 稍微增加内边距 */
+  border-radius: 40rpx; /* 恢复为圆角胶囊 */
   margin-right: 16rpx;
-  box-shadow: 4rpx 4rpx 0 0 #000;
+  box-shadow: 2rpx 2rpx 0 0 #000;
   flex-shrink: 0;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .campus-picker:active {
-  transform: translate(2rpx, 2rpx);
-  box-shadow: 2rpx 2rpx 0 0 #000;
+  transform: translate(1rpx, 1rpx);
+  box-shadow: 1rpx 1rpx 0 0 #000;
 }
 
 .campus-text {
   font-size: 26rpx;
-  font-weight: 700;
+  font-weight: 800;
   color: #000;
   margin-right: 6rpx;
 }
 
 .picker-arrow {
-  font-size: 18rpx;
+  font-size: 14rpx;
   color: #000;
+  margin-top: 4rpx;
 }
 
 /* 搜索框 */
 .search-bar {
   flex: 1;
   background-color: #fff;
-  border: 4rpx solid #000;
-  border-radius: 40rpx;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 40rpx; /* 恢复为圆角胶囊 */
   display: flex;
   align-items: center;
-  padding: 0 20rpx;
-  box-shadow: 4rpx 4rpx 0 0 #000;
-  /* Ensure it doesn't overlap with capsule too much if calculation is off */
-  min-width: 100rpx; 
+  padding: 0 24rpx;
+  box-shadow: 2rpx 2rpx 0 0 #000;
+  height: 100%; /* 与容器（胶囊）高度完全对齐 */
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .search-placeholder {
   margin-left: 12rpx;
   font-size: 26rpx;
-  color: #888;
+  font-weight: 500;
+  color: #999;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* --- 标签选项卡 --- */
-.tabs-wrapper {
-  position: fixed;
-  left: 0;
-  width: 100%;
-  z-index: 99;
-  background-color: var(--background);
-  /* 模仿首页的下方细灰线 */
-  border-bottom: 2rpx solid #EAEAEA;
 }
 
 /* --- 瀑布流 --- */
@@ -95,15 +72,15 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  /* 极小间距优化：左 6rpx，右 10rpx (平衡右侧卡片阴影) */
-  padding: 0 10rpx 0 6rpx;
+  /* 统一间距：16rpx */
+  padding: 16rpx;
   /* Ensure content starts after the fixed header */
   margin-top: 10rpx; 
 }
 
 .waterfall-col {
-  /* 50vw - 间距(Total 26rpx / 2 = 13rpx) */
-  width: calc(50vw - 13rpx);
+  /* 50% - (16rpx / 2 = 8rpx) */
+  width: calc(50% - 8rpx);
   display: flex;
   flex-direction: column;
 }

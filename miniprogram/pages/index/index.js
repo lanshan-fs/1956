@@ -31,19 +31,15 @@ Page({
   },
 
   onLoad() {
-    const systemInfo = wx.getSystemInfoSync();
-    const navBarHeight = 44;
-    const tabHeight = 40; // 对应 CSS 中的高度
-    const navHeaderHeight = systemInfo.statusBarHeight + navBarHeight;
-    
+    this.initWaterfall();
+  },
+
+  onNavHeightChange(e) {
+    const { navHeaderHeight } = e.detail;
     this.setData({
-      statusBarHeight: systemInfo.statusBarHeight,
-      navBarHeight: navBarHeight,
-      tabHeight: tabHeight,
       navHeaderHeight: navHeaderHeight,
       stickyTop: navHeaderHeight
     });
-    this.initWaterfall();
   },
   
   onShow() {

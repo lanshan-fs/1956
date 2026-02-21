@@ -1,0 +1,57 @@
+.neo-nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--background);
+}
+
+.nav-main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  position: relative;
+}
+
+.nav-left, .nav-right {
+  width: 80rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 2rpx;
+  font-family: 'Impact', fantasy, sans-serif;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 自定义模式布局 */
+.nav-custom-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-left: 24rpx;
+  box-sizing: border-box;
+}
+
+.nav-border {
+  width: 100%;
+  height: 0;
+  border-bottom: var(--border-width) solid var(--border-color);
+}

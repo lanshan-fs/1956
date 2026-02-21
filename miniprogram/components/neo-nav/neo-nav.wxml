@@ -1,0 +1,26 @@
+<view class="neo-nav-wrapper" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav-main" style="height: {{navBarHeight}}px;">
+    
+    <!-- 默认模式 -->
+    <block wx:if="{{mode === 'default'}}">
+      <view class="nav-content">
+        <view class="nav-left" bindtap="onSearch">
+          <icon type="search" size="20" color="#1A1A1A"/>
+        </view>
+        <view class="nav-title" bindtap="onTitleTap">{{title}}</view>
+        <view class="nav-right"></view>
+      </view>
+    </block>
+
+    <!-- 自定义模式 -->
+    <block wx:else>
+      <view class="nav-custom-content" style="height: {{menuButtonInfo.height}}px; padding-right: {{navPaddingRight}}px;">
+        <slot name="left"></slot>
+        <slot name="center"></slot>
+      </view>
+    </block>
+
+  </view>
+  <view class="nav-border"></view>
+</view>
+<view style="height: {{navHeaderHeight}}px;"></view>

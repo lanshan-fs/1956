@@ -4,7 +4,8 @@
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark",
   "usingComponents": {
+    "neo-nav": "/components/neo-nav/neo-nav",
     "neo-card": "/components/neo-card/neo-card",
-    "neo-tabs": "/components/neo-tabs/neo-tabs"
+    "neo-tabs-bar": "/components/neo-tabs-bar/neo-tabs-bar"
   }
 }

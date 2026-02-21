@@ -19,29 +19,15 @@ Page({
   },
 
   onLoad(options) {
-    this.initNavigationLayout();
     this.generateMockData();
   },
 
-  initNavigationLayout() {
-    const sysInfo = wx.getSystemInfoSync();
-    const menuButton = wx.getMenuButtonBoundingClientRect();
-    
-    // Calculate Navigation Bar Height
-    // Typically: MenuButton Bottom + MenuButton Top - StatusBarHeight (Wait, simple way is MenuButton Bottom + Padding)
-    // Reliable way: (MenuButton Top - StatusBar Height) * 2 + MenuButton Height + StatusBar Height
-    // But usually we just want the content to align with the menu button.
-    
-    // Let's set the navBarHeight to cover everything down to the bottom of the capsule + padding
-    const navBarHeight = menuButton.bottom + 8; // 8px padding bottom
-    const navContentRightPadding = sysInfo.windowWidth - menuButton.left;
-    
+  onNavHeightChange(e) {
+    const { navBarHeight, navHeaderHeight } = e.detail;
     this.setData({
       navBarHeight: navBarHeight,
-      menuButtonTop: menuButton.top,
-      menuButtonHeight: menuButton.height,
-      navContentRightPadding: navContentRightPadding,
-      tabsHeight: 56 // Approx 112rpx
+      navHeaderHeight: navHeaderHeight,
+      tabsHeight: 44 // 统一调整为 44px
     });
   },
 

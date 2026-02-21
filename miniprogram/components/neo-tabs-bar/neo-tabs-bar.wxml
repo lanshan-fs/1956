@@ -1,0 +1,87 @@
+<view class="neo-tabs-bar-container" style="top: {{top}}px;">
+  <!-- 1. 顶层标签行 -->
+  <view class="tabs-main-row">
+    <scroll-view class="tabs-scroll" scroll-x scroll-with-animation scroll-into-view="tab-{{active}}">
+      <view class="tabs-inner">
+        <view 
+          wx:for="{{tabs}}" 
+          wx:key="index"
+          id="tab-{{index}}"
+          class="tab-item {{active === index ? 'active' : ''}}"
+          bindtap="onTabTap"
+          data-index="{{index}}"
+        >
+          {{item.name || item}}
+        </view>
+        <view class="spacer"></view>
+      </view>
+    </scroll-view>
+
+    <!-- 更多按钮 -->
+    <view wx:if="{{showMore}}" class="more-btn {{showPopup ? 'open' : ''}}" bindtap="togglePopup">
+      <view class="icon-chevron"></view>
+    </view>
+  </view>
+
+  <!-- 2. 细灰线 -->
+  <view class="bottom-border"></view>
+
+  <!-- 3. 管理弹窗 -->
+  <view 
+    class="popup-mask {{showPopup ? 'show' : ''}}" 
+    bindtap="togglePopup" 
+    catchtouchmove="true"
+    style="top: {{top + 40}}px;"
+  >
+    <view class="popup-body" catchtap="stopProp">
+      <!-- 我的频道 -->
+      <view class="section">
+        <view class="section-header">
+          <view class="title-group">
+            <text class="main-title">我的频道</text>
+            <text class="sub-title">{{isEditMode ? '点击移除频道' : '点击进入频道'}}</text>
+          </view>
+          <view class="edit-btn {{isEditMode ? 'editing' : ''}}" catchtap="toggleEditMode">
+            {{isEditMode ? '完成' : '编辑'}}
+          </view>
+        </view>
+        <view class="grid">
+          <view 
+            wx:for="{{tabs}}" 
+            wx:key="index"
+            class="grid-item {{active === index ? 'active' : ''}} {{isEditMode && index !== 0 ? 'shake' : ''}}"
+            catchtap="{{isEditMode ? 'onRemoveTab' : 'onTabTap'}}"
+            data-index="{{index}}"
+          >
+            <text class="item-text">{{item.name || item}}</text>
+            <view wx:if="{{isEditMode && index !== 0}}" class="icon-remove">
+              <view class="line"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 推荐频道 (如果有) -->
+      <view class="section" wx:if="{{recommendTabs.length > 0}}">
+        <view class="section-header">
+          <view class="title-group">
+            <text class="main-title">推荐频道</text>
+            <text class="sub-title">点击添加频道</text>
+          </view>
+        </view>
+        <view class="grid">
+          <view 
+            wx:for="{{recommendTabs}}" 
+            wx:key="index"
+            class="grid-item recommend"
+            catchtap="onAddTab"
+            data-index="{{index}}"
+          >
+            <text class="plus">+</text>
+            <text class="item-text">{{item.name || item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
